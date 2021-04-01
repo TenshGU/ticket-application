@@ -2,9 +2,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql:///ticket
-      username:
-      password:
+      url: jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8
+      username:root
+      password:Ticket123?
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.edu.scau.ticket.application.vo
