@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  * @createDate: 2021/4/2
  */
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -65,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 //放行某些url访问
-                .antMatchers("/index").permitAll()
+                .antMatchers("/index","/toLogin","/toError").permitAll()
                 .anyRequest().authenticated()
 
                 //开启登录

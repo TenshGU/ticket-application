@@ -1,10 +1,18 @@
 package cn.edu.scau.ticket.application.beans;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+/**
+ * @description:
+ * @author: Tensh
+ * @createDate: 2021/4/5
+ */
 
 @AllArgsConstructor
 @NoArgsConstructor
 public enum ResultStatus {
+
     SUCCESS(200,"响应成功"),
     FAILED(400,"响应失败"),
     NO_LOGIN(1001,"未登录"),
@@ -13,13 +21,13 @@ public enum ResultStatus {
     NO_PERMISSION(1004,"没有权限"),
     LOGIN_FAIL(1005,"登录失败"),
     LOGIN_SUCCESS(1006,"登录成功");
-    ;
+
     /**
-     * 状态码
+     * status-code,such as:200,300,400...
      */
     private int code;
     /**
-     * 状态说明
+     * Description of status
      */
     private String msg;
 

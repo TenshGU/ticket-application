@@ -1,7 +1,8 @@
 package cn.edu.scau.ticket.application;
 
+import cn.edu.scau.ticket.application.beans.ResultEntity;
 import cn.edu.scau.ticket.application.beans.ResultStatus;
-import cn.edu.scau.ticket.application.handler.Converter;
+import com.alibaba.fastjson.JSON;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,8 +15,8 @@ class ApplicationTests {
 
     @Test
     void testJsonConvert() {
-        ResultStatus loginSuccess = ResultStatus.LOGIN_SUCCESS;
-        String s = Converter.EnumtoJson(loginSuccess);
+        ResultEntity loginSuccess = ResultEntity.getResultEntity(ResultStatus.LOGIN_SUCCESS);
+        String s = JSON.toJSONString(loginSuccess);
         System.out.println(s);
     }
 }
