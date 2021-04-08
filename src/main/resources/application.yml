@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8
+      username: root
+      password: Ticket123?
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.edu.scau.ticket.application.vo
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    use-generated-keys: true

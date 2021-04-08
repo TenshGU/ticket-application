@@ -1,0 +1,63 @@
+.login-body {
+  height: calc(100vh);
+  width: calc(100vw);
+  background-image: url("./loginpic.jpg");
+  background-size: 100% 100%;
+
+  display: flex;
+  align-items: center; /*定义body的元素垂直居中*/
+  justify-content: center; /*定义body的里的元素水平居中*/
+}
+
+.login-title {
+  /* margin-bottom: -100px;
+  margin-right: 50px; */
+  margin: 20px auto;
+  width: 100%;
+  height: 60px;
+  font-family: 造字工房力黑（非商用）常规体;
+  font-size: 40px;
+  color: #ffffff;
+  position:relative;
+}
+
+
+.site-card-border-less-wrapper {
+  
+  padding: 0px;
+  background: #ececec;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.svg{
+    margin-left: 100px;
+    position: relative;
+}
+
+.svg-p{
+  position:absolute;
+  left: -25px;
+  top: 40px;
+  font-family: 造字工房力黑（非商用）常规体;
+  font-weight: 500px;
+  color:dodgerblue
+
+}
+
+.login-form-button{
+  width: 100%;
+}
+
+.login-form-forgot{
+  float: right;
+}
+
+.register-button{
+  position: absolute;
+  bottom: 4%;
+  left: 44%;
+}
