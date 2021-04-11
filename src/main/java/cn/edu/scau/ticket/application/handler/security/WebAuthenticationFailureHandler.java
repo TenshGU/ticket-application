@@ -2,6 +2,7 @@ package cn.edu.scau.ticket.application.handler.security;
 
 import cn.edu.scau.ticket.application.beans.ResultEntity;
 import cn.edu.scau.ticket.application.beans.ResultStatus;
+import cn.edu.scau.ticket.application.utils.JsonWriter;
 import com.alibaba.fastjson.JSON;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
@@ -23,10 +24,6 @@ public class WebAuthenticationFailureHandler implements AuthenticationFailureHan
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         ResultEntity loginFail = ResultEntity.getResultEntity(ResultStatus.LOGIN_FAIL);
-        httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        PrintWriter writer = httpServletResponse.getWriter();
-        writer.write(JSON.toJSONString(loginFail));
-        writer.flush();
-        writer.close();
+        JsonWriter.writeResultToResponse(httpServletResponse,loginFail);
     }
 }

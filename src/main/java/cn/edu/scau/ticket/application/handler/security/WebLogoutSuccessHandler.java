@@ -2,6 +2,7 @@ package cn.edu.scau.ticket.application.handler.security;
 
 import cn.edu.scau.ticket.application.beans.ResultEntity;
 import cn.edu.scau.ticket.application.beans.ResultStatus;
+import cn.edu.scau.ticket.application.utils.JsonWriter;
 import com.alibaba.fastjson.JSON;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -23,10 +24,6 @@ public class WebLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         ResultEntity loginOutSuccess = ResultEntity.getResultEntity(ResultStatus.LOGIN_OUT_SUCCESS);
-        httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        PrintWriter writer = httpServletResponse.getWriter();
-        writer.write(JSON.toJSONString(loginOutSuccess));
-        writer.flush();
-        writer.close();
+        JsonWriter.writeResultToResponse(httpServletResponse,loginOutSuccess);
     }
 }

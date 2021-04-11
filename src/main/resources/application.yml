@@ -17,3 +17,9 @@ mybatis:
     map-underscore-to-camel-case: true
     cache-enabled: true
     use-generated-keys: true
+
+token:
+  header: Bear
+  secret: ticket...
+  expireTime: 1
+  issuer: ticket-application
