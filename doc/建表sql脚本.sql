@@ -18,26 +18,26 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 CREATE TABLE company (
-    NAME VARCHAR(64) PRIMARY KEY COMMENT '公司名称',
+    `name` VARCHAR(64) PRIMARY KEY COMMENT '公司名称',
     location VARCHAR(64) NOT NULL COMMENT '公司地址'
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE plane (
     id INT(11) PRIMARY KEY AUTO_INCREMENT COMMENT '飞机id',
-    NAME VARCHAR(64) NOT NULL COMMENT '飞机名称',
+    `name` VARCHAR(64) NOT NULL COMMENT '飞机名称',
     capacity INT(5) NOT NULL COMMENT '飞机容量',
     company_name VARCHAR(64) COMMENT '飞机所属公司',
     CONSTRAINT fk_plane_company FOREIGN KEY(company_name) REFERENCES company(NAME) ON DELETE CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE airport (
-    NAME VARCHAR(64) PRIMARY KEY COMMENT '机场名称',
+    `name` VARCHAR(64) PRIMARY KEY COMMENT '机场名称',
     location VARCHAR(64) NOT NULL COMMENT '机场所在地'
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE flight (
     id INT(11) PRIMARY KEY AUTO_INCREMENT COMMENT '航班id',
-    NAME VARCHAR(64) NOT NULL COMMENT '航班名称',
+    `name` VARCHAR(64) NOT NULL COMMENT '航班名称',
     leave_time DATETIME NOT NULL COMMENT '起飞时间',
     arrive_time DATETIME NOT NULL COMMENT '到达时间',
     leave_airport_name VARCHAR(64) NOT NULL COMMENT '起飞机场',
@@ -57,43 +57,42 @@ CREATE TABLE plane_ticket (
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
-    id INT(11) PRIMARY KEY AUTO_INCREMENT COMMENT '用户id',
+    username VARCHAR(64) PRIMARY KEY COMMENT '用户名',
+    `password` VARCHAR(300) NOT NULL COMMENT '密码',
     first_name VARCHAR(64) NOT NULL COMMENT 'first_name',
     last_name VARCHAR(64) NOT NULL COMMENT 'last_name',
     gender CHAR(1) DEFAULT 'M' COMMENT '性别',
     age INT(3) NOT NULL COMMENT '年龄',
     email VARCHAR(64) COMMENT '邮箱',
-    username VARCHAR(64) NOT NULL UNIQUE COMMENT '用户名',
-    PASSWORD VARCHAR(64) NOT NULL COMMENT '密码',
     image VARCHAR(64) COMMENT '头像'
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `order` (
-    user_id INT(11),
+    username VARCHAR(64),
     ticket_id INT(11),
     order_time DATETIME,
-    PRIMARY KEY(user_id,ticket_id),
-    CONSTRAINT fk_ouid FOREIGN KEY(user_id) REFERENCES USER(id) ON DELETE CASCADE,
+    PRIMARY KEY(username,ticket_id),
+    CONSTRAINT fk_oun FOREIGN KEY(username) REFERENCES `user`(username) ON DELETE CASCADE,
     CONSTRAINT fk_otid FOREIGN KEY(ticket_id) REFERENCES plane_ticket(id) ON DELETE CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `group` (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
-    NAME VARCHAR(20) NOT NULL,
+    `name` VARCHAR(20) NOT NULL,
     description VARCHAR(64)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE grp_user (
-    user_id INT(11),
     group_id INT(11),
-    PRIMARY KEY(user_id,group_id),
-    CONSTRAINT fk_grp_user_uid FOREIGN KEY(user_id) REFERENCES USER(id) ON DELETE CASCADE,
+    username VARCHAR(64),
+    PRIMARY KEY(group_id,username),
+    CONSTRAINT fk_grp_user_un FOREIGN KEY(username) REFERENCES `user`(username) ON DELETE CASCADE,
     CONSTRAINT fk_grp_user_gid FOREIGN KEY(group_id) REFERENCES `group`(id) ON DELETE CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE role (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
-    NAME VARCHAR(20) NOT NULL,
+    `name` VARCHAR(20) NOT NULL,
     description VARCHAR(64)   
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -107,7 +106,7 @@ CREATE TABLE grp_role (
 
 CREATE TABLE permission(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
-    TYPE VARCHAR(20),
+    `type` VARCHAR(20),
     description VARCHAR(64)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -121,7 +120,7 @@ CREATE TABLE role_per (
 
 CREATE TABLE menu(
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
-    NAME VARCHAR(20),
+    `name` VARCHAR(20),
     url VARCHAR(64)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
