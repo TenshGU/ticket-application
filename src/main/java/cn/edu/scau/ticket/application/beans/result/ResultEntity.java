@@ -1,4 +1,4 @@
-package cn.edu.scau.ticket.application.beans;
+package cn.edu.scau.ticket.application.beans.result;
 
 import com.alibaba.fastjson.annotation.JSONType;
 import lombok.*;

@@ -1,7 +1,7 @@
 package cn.edu.scau.ticket.application.handler.security;
 
-import cn.edu.scau.ticket.application.beans.ResultEntity;
-import cn.edu.scau.ticket.application.beans.ResultStatus;
+import cn.edu.scau.ticket.application.beans.result.ResultEntity;
+import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.utils.JsonWriter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

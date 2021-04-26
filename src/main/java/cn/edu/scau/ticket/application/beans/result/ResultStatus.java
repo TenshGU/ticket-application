@@ -1,4 +1,4 @@
-package cn.edu.scau.ticket.application.beans;
+package cn.edu.scau.ticket.application.beans.result;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ public enum ResultStatus {
     SUCCESS(200,"响应成功"),
     FAILED(400,"响应失败"),
     NO_LOGIN(1001,"未登录"),
-    LOGIN_OUT_SUCCESS(1002,"退出登录成功"),
+    LOGIN_OUT_SUCCESS(1002,"注销成功"),
     LOGIN_EXPIRED(1003,"登录过期"),
     NO_PERMISSION(1004,"没有权限"),
     LOGIN_FAIL(1005,"登录失败"),

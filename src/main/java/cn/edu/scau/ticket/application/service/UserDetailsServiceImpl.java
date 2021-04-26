@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
     /**
      * 从数据库中查找用户
-     * @param name 用户名
+     * @param id 用户名
      * @return
      * @throws UsernameNotFoundException
      */
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String password = passwordEncoder.encode("123");
-        return User.withUsername(name).password(password).authorities("p1").build();
+        return User.withUsername(id).password(password).authorities("p1").build();
     }
 }

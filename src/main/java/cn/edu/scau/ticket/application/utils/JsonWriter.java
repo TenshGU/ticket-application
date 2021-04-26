@@ -1,6 +1,6 @@
 package cn.edu.scau.ticket.application.utils;
 
-import cn.edu.scau.ticket.application.beans.ResultEntity;
+import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import com.alibaba.fastjson.JSON;
 import org.springframework.http.MediaType;
 import javax.servlet.http.HttpServletResponse;

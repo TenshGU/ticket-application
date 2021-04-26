@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 //放行某些url访问
-                .antMatchers("/index","/toLogin","/toError").permitAll()
+                .antMatchers("/index","/register","/toLogin","/toError").permitAll()
                 .anyRequest().authenticated()
 
                 //开启登录

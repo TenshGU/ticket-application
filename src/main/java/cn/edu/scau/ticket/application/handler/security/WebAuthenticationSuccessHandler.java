@@ -1,7 +1,7 @@
 package cn.edu.scau.ticket.application.handler.security;
 
-import cn.edu.scau.ticket.application.beans.ResultEntity;
-import cn.edu.scau.ticket.application.beans.ResultStatus;
+import cn.edu.scau.ticket.application.beans.result.ResultEntity;
+import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.utils.JWTUtil;
 import cn.edu.scau.ticket.application.utils.JsonWriter;
 import io.jsonwebtoken.Claims;
