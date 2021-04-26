@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.ibatis.type.Alias;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @description:
@@ -18,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Alias("user")
 public class User implements UserDetails {
 
     private Integer id;
@@ -29,7 +32,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String image;
-    private List<UserAuthority> authorities;
+    private Set<UserAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

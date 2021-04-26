@@ -1,5 +1,6 @@
 package cn.edu.scau.ticket.application.handler.security;
 
+import cn.edu.scau.ticket.application.beans.User;
 import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.utils.JWTUtil;
@@ -7,6 +8,7 @@ import cn.edu.scau.ticket.application.utils.JsonWriter;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;

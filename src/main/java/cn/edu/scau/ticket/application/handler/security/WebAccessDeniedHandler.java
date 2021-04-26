@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 public class WebAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException {
         ResultEntity noPermission = ResultEntity.getResultEntity(ResultStatus.NO_PERMISSION);
         JsonWriter.writeResultToResponse(httpServletResponse,noPermission);
     }

@@ -2,6 +2,7 @@ package cn.edu.scau.ticket.application.config;
 
 import cn.edu.scau.ticket.application.handler.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,7 +25,11 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  * @createDate: 2021/4/2
  */
 @Configuration
+@EnableConfigurationProperties(ReleaseProperties.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private ReleaseProperties releaseProperties;
 
     /**
      * 权限不足处理器
@@ -73,8 +78,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                //放行某些url访问
-                .antMatchers("/index","/register","/toLogin","/toError").permitAll()
+                /*放行某些url访问
+                注解负责权限
+                配置文件负责匿名访问
+                 */
+                .antMatchers(releaseProperties.getReleasePath()).permitAll()
                 .anyRequest().authenticated()
 
                 //开启登录

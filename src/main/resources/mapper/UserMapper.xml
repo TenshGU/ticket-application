@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.scau.ticket.application.mapper.UserMapper">
+
+    <resultMap id="userResultMap" type="user">
+        <id property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="gender" column="gender"/>
+        <result property="age" column="age"/>
+        <result property="email" column="email"/>
+        <result property="image" column="image"/>
+        <collection property="authorities"
+                    column="username"
+                    select="getUserAuthoritiesByUsername"/>
+    </resultMap>
+    
+    <select id="getUserByUsername" resultMap="userResultMap">
+        select * from user where username = #{username}
+    </select>
+
+    <select id="getUserAuthoritiesByUsername" resultType="userAuthority">
+        select r.name authority from grp_user gu
+        left join grp_role gr
+        on gu.group_id = gr.group_id
+        left join role r
+        on gr.role_id = r.id
+        where gu.username = #{username}
+    </select>
+    
+</mapper>

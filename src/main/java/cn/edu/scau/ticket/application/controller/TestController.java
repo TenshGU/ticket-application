@@ -20,11 +20,6 @@ public class TestController {
         return "test";
     }
 
-    @GetMapping("/toLogin")
-    public String login() {
-        return "login";
-    }
-
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     @GetMapping("/toError")

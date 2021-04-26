@@ -2,17 +2,19 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql:///ticket #jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8
       username: root
-      password: Ticket123?
+      password: root #Ticket123?
   mvc:
     view:
       prefix: /
       suffix: .html
+  security:
+    release-path: [/index,/register,/toLogin,/toError,/test]
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: cn.edu.scau.ticket.application.vo
+  type-aliases-package: cn.edu.scau.ticket.application.*
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
@@ -21,5 +23,5 @@ mybatis:
 token:
   header: Bear
   secret: ticket...
-  expireTime: 1
+  expireTime: 30
   issuer: ticket-application

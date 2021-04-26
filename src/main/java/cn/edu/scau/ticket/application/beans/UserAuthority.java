@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.ibatis.type.Alias;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Alias("userAuthority")
 public class UserAuthority implements GrantedAuthority {
 
     private String authority;
