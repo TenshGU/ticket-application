@@ -2,9 +2,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql:///ticket #jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8 #jdbc:mysql:///ticket
       username: root
-      password: root #Ticket123?
+      password: Ticket123? #root
   mvc:
     view:
       prefix: /
