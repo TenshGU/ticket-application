@@ -1,4 +1,4 @@
-package cn.edu.scau.ticket.application.service;
+package cn.edu.scau.ticket.application.service.impl;
 
 import cn.edu.scau.ticket.application.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

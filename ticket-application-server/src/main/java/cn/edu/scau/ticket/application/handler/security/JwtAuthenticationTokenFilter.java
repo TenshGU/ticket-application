@@ -1,6 +1,6 @@
 package cn.edu.scau.ticket.application.handler.security;
 
-import cn.edu.scau.ticket.application.service.UserDetailsServiceImpl;
+import cn.edu.scau.ticket.application.service.impl.UserDetailsServiceImpl;
 import cn.edu.scau.ticket.application.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -102,6 +102,12 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>2.4.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.tobato/fastdfs-client -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.27.2</version>
+        </dependency>
     </dependencies>
 
     <build>

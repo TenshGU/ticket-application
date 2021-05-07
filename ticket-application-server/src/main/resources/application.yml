@@ -25,3 +25,11 @@ token:
   secret: ticket...
   expireTime: 30
   issuer: ticket-application
+
+fdfs:
+  #读取时间
+  so-timeout: 1500
+  #连接超时时间
+  connect-timeout: 600
+  #tracker
+  tracker-list: 121.5.237.69:22122

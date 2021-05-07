@@ -23,14 +23,13 @@ import java.util.Set;
 @Alias("user")
 public class User implements UserDetails {
 
-    private Integer id;
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String gender;
     private Integer age;
     private String email;
-    private String username;
-    private String password;
     private String image;
     private Set<UserAuthority> authorities;
 
