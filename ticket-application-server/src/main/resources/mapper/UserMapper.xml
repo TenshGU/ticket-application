@@ -30,5 +30,10 @@
         on gr.role_id = r.id
         where gu.username = #{username}
     </select>
-    
+
+    <insert id="saveUser" keyColumn="" keyProperty="">
+        insert into user
+        values (#{username},#{password},#{firstName},#{lastName},#{gender},#{age},#{email},#{image})
+    </insert>
+
 </mapper>

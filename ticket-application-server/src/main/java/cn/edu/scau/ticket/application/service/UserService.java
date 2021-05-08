@@ -1,7 +1,9 @@
 package cn.edu.scau.ticket.application.service;
 
 import cn.edu.scau.ticket.application.beans.User;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.Map;
 
 /**
  * @description:
@@ -10,4 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface UserService {
     boolean saveUser(User user, MultipartFile file);
+
+    Map<String, Object> getUserValidErrorMsg(BindingResult bindingResult);
 }
