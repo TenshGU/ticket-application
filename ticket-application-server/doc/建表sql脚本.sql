@@ -59,6 +59,7 @@ CREATE TABLE plane_ticket (
 CREATE TABLE `user` (
     username VARCHAR(64) PRIMARY KEY COMMENT '用户名',
     `password` VARCHAR(300) NOT NULL COMMENT '密码',
+    phone varchar(12) not null comment '手机号码',
     first_name VARCHAR(64) NOT NULL COMMENT 'first_name',
     last_name VARCHAR(64) NOT NULL COMMENT 'last_name',
     gender CHAR(1) DEFAULT 'M' COMMENT '性别',
@@ -92,7 +93,7 @@ CREATE TABLE grp_user (
 
 CREATE TABLE role (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(20) NOT NULL,
+    `name` VARCHAR(20) NOT NULL unique,
     description VARCHAR(64)   
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -131,3 +132,9 @@ CREATE TABLE per_menu (
     CONSTRAINT fk_per_menu_pid FOREIGN KEY(permission_id) REFERENCES permission(id) ON DELETE CASCADE,
     CONSTRAINT fk_per_menu_mid FOREIGN KEY(menu_id) REFERENCES menu(id) ON DELETE CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+CREATE INDEX roleName_unique ON role(`name`);
+#EXPLAIN SELECT group_id FROM grp_role
+ #                                LEFT JOIN role r
+  #                                         ON role_id = r.id
+   #     WHERE r.name IN('ticketManager','commonUser');

@@ -4,6 +4,8 @@ import cn.edu.scau.ticket.application.beans.User;
 import cn.edu.scau.ticket.application.beans.UserAuthority;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.List;
 import java.util.Set;
 
 @Mapper

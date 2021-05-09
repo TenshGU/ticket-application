@@ -32,7 +32,6 @@ public class FastDFSUtil {
             FastImageFile fastImageFile = new FastImageFile(bais,size,extension,metaDataSet);
             storePath = fastFileStorageClient.uploadImage(fastImageFile);
         } else {
-
             storePath = fastFileStorageClient.uploadFile(bais, size, extension, metaDataSet);
         }
         return storePath.getFullPath();

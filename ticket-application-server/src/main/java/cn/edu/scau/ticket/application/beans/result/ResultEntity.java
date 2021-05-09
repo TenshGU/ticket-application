@@ -2,8 +2,7 @@ package cn.edu.scau.ticket.application.beans.result;
 
 import com.alibaba.fastjson.annotation.JSONType;
 import lombok.*;
-
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class ResultEntity {
     /**
      * Information of result
      */
-    private Map<String,Object> infoMap = new HashMap<>();
+    private Map<String,Object> infoMap = new LinkedHashMap<>();
 
     public static ResultEntity getResultEntity(ResultStatus rs) {
         ResultEntity entity = new ResultEntity();

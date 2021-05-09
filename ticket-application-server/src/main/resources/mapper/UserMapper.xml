@@ -7,6 +7,7 @@
     <resultMap id="userResultMap" type="user">
         <id property="username" column="username"/>
         <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
         <result property="firstName" column="first_name"/>
         <result property="lastName" column="last_name"/>
         <result property="gender" column="gender"/>
@@ -31,9 +32,14 @@
         where gu.username = #{username}
     </select>
 
-    <insert id="saveUser" keyColumn="" keyProperty="">
+    <insert id="saveUser">
         insert into user
-        values (#{username},#{password},#{firstName},#{lastName},#{gender},#{age},#{email},#{image})
+        values (#{username},#{password},#{phone},#{firstName},#{lastName},#{gender},#{age},#{email},#{image});
+        insert into grp_user
+        values
+            <foreach collection="groupIds" item="groupId" separator=",">
+                 (#{groupId}, #{username})
+            </foreach>
     </insert>
 
 </mapper>

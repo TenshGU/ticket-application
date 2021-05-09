@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.scau.ticket.application.mapper.AuthMapper">
+    <select id="getGroupIdsByRoleName" resultType="int">
+        select group_id from grp_role
+        left join role r
+        on role_id = r.id
+        where r.name in
+        <foreach collection="authorities" item="auth" open="(" separator="," close=")">
+            #{auth.authority}
+        </foreach>
+    </select>
+</mapper>

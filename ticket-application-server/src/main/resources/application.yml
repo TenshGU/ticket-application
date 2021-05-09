@@ -1,8 +1,9 @@
+#ENC(...)代表已经加密后的字符串
 spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql:///ticket #jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql:///ticket?allowMultiQueries=true #jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
       username: root
       password: root #Ticket123?
   mvc:
@@ -10,7 +11,14 @@ spring:
       prefix: /
       suffix: .html
   security:
-    release-path: [/index,/register,/toLogin,/toError,/test]
+    release-path: [/index,/register,/toLogin,/toError,/test,/testUpload]
+  cache:
+    cache-names: cache
+    type: redis
+  redis:
+    host: ENC(yeFiySbSCt0800oYIy0TzzCLGesf+lbCJIDf4FIYaQJZZyhFq8biwvBU/qahi7DLUgeHw5cKh08=)
+    port: 6379
+    password: ENC(AVICKI0eW6JlZ+04W0Yxf4wF4+zNJOi0)
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -32,4 +40,13 @@ fdfs:
   #连接超时时间
   connect-timeout: 600
   #tracker
-  tracker-list: 121.5.237.69:22122
+  tracker-list: ENC(9MKyelkZFHLbi3SzgLhlaC9s6ifJygwoXxgSYET/mvw=)
+  pool:
+    max-total: 200
+    max-total-per-key: 50
+
+jasypt:
+  encryptor:
+    password: mego
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

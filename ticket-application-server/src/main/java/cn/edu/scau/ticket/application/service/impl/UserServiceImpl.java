@@ -1,10 +1,14 @@
 package cn.edu.scau.ticket.application.service.impl;
 
 import cn.edu.scau.ticket.application.beans.User;
+import cn.edu.scau.ticket.application.beans.UserAuthority;
+import cn.edu.scau.ticket.application.mapper.AuthMapper;
 import cn.edu.scau.ticket.application.mapper.UserMapper;
+import cn.edu.scau.ticket.application.service.AuthService;
 import cn.edu.scau.ticket.application.service.UserService;
 import cn.edu.scau.ticket.application.utils.FastDFSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @description:
@@ -28,9 +33,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    private FastDFSUtil fastDFSUtil;
+    private AuthService authService;
 
-    private final String DEFAULT_IMG_PATH = "";
+    @Autowired
+    private FastDFSUtil fastDFSUtil;
 
     @Override
     public boolean saveUser(User user, MultipartFile file) {
@@ -42,7 +48,14 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             image = DEFAULT_IMG_PATH;
         }
+        //设置图片url
         user.setImage(image);
+        //设置默认权限
+        user.setAuthorities(DEFAULT_AUTHORITIES);
+        //设置组id
+        List<Integer> groupIdsByRoleName = authService.getGroupIdsByRoleName(DEFAULT_AUTHORITIES);
+        user.setGroupIds(groupIdsByRoleName);
+
         userMapper.saveUser(user);
         return true;
     }

@@ -1,6 +1,6 @@
 INSERT INTO `user` VALUES
-('admin','$2a$10$g5K1kF0Y7M/jfRn3d22jl.WmAAPzgwMxi3B4M4gfWgMlGQgt7tAl2','Hill','Jacker','M',17,'123456@fox.com',NULL), #admin
-('zs233','$2a$10$VAjoZ6ztVO7Bl2SjEw/SEub9aYcb6C2jr2rwgHqTrXXAzH/RdvAWG','张','三','M',18,'zhangsan@fox.com',NULL); #123456
+('admin','$2a$10$g5K1kF0Y7M/jfRn3d22jl.WmAAPzgwMxi3B4M4gfWgMlGQgt7tAl2','17925678901','Hill','Jacker','M',17,'123456@fox.com','group1/M00/00/00/eQXtRWCXOLuAXoD5AAAMz79eafk023.jpg'), #admin
+('zs233','$2a$10$VAjoZ6ztVO7Bl2SjEw/SEub9aYcb6C2jr2rwgHqTrXXAzH/RdvAWG','15103265410','张','三','M',18,'zhangsan@fox.com','group1/M00/00/00/eQXtRWCXOLuAXoD5AAAMz79eafk023.jpg'); #123456
 
 INSERT INTO `group` VALUES
 (1,'ticketGroup','管理票务组'),
