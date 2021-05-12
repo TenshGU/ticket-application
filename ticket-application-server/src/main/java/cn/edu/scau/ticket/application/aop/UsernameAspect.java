@@ -22,7 +22,7 @@ public class UsernameAspect {
     @Autowired
     private RBloomFilter<String> usernameBloomFilter;
 
-    @Around("execution(* *.saveUser(..))")
+    @Around("execution(* cn.edu.scau.ticket.application.controller.UserController.register(..))")
     public Object checkUsername(ProceedingJoinPoint joinPoint) {
         User user = (User) joinPoint.getArgs()[0];
         boolean contains = usernameBloomFilter.contains(user.getUsername());
@@ -37,6 +37,7 @@ public class UsernameAspect {
             //正常方法执行结果
             Object[] args = joinPoint.getArgs();
             proceed = joinPoint.proceed(args);
+            usernameBloomFilter.add(user.getUsername());
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

@@ -15,9 +15,11 @@ import java.util.*;
 public interface UserService {
     String DEFAULT_IMG_PATH = "group1/M00/00/00/eQXtRWCXOLuAXoD5AAAMz79eafk023.jpg";
 
-    Set<UserAuthority> DEFAULT_AUTHORITIES = new HashSet<>(Collections.singletonList(new UserAuthority("commonUser")));
+    Set<UserAuthority> DEFAULT_AUTHORITIES = new HashSet<>(Collections.singletonList(new UserAuthority("ROLE_commonUser")));
 
     ResultEntity saveUser(User user, MultipartFile file);
 
     ResultEntity validUserError(BindingResult bindingResult);
+
+    ResultEntity getUserInfo(String username);
 }

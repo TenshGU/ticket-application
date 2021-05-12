@@ -32,7 +32,7 @@ mybatis:
     use-generated-keys: true
 
 token:
-  header: Bear
+  header: bear
   secret: ticket...
   expireTime: 30
   issuer: ticket-application

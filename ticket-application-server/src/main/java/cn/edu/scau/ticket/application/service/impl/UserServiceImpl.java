@@ -9,6 +9,7 @@ import cn.edu.scau.ticket.application.mapper.UserMapper;
 import cn.edu.scau.ticket.application.service.AuthService;
 import cn.edu.scau.ticket.application.service.UserService;
 import cn.edu.scau.ticket.application.utils.FastDFSUtil;
+import cn.edu.scau.ticket.application.utils.JsonWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private FastDFSUtil fastDFSUtil;
@@ -81,5 +85,17 @@ public class UserServiceImpl implements UserService {
         return ResultEntity
                 .getResultEntity(ResultStatus.FAILED)
                 .addInfo(map);
+    }
+
+    @Override
+    public ResultEntity getUserInfo(String username) {
+        User user = (User) userDetailsService.loadUserByUsername(username);
+        Map<String, Object> userInfo = JsonWriter.convertObj2MapInfo(User.class, user);
+        //移除隐私和无关信息
+        userInfo.remove("password");
+        userInfo.remove("groupIds");
+        return ResultEntity
+                .getResultEntity(ResultStatus.SUCCESS)
+                .addInfo(userInfo);
     }
 }

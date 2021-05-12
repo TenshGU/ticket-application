@@ -11,8 +11,8 @@ INSERT INTO grp_user VALUES
 (2,'zs233');
 
 INSERT INTO role VALUES
-(1,'ticketManager','负责票务的CRUD'),
-(2,'commonUser','普通用户买票');
+(1,'ROLE_ticketManager','负责票务的CRUD'),
+(2,'ROLE_commonUser','普通用户买票');
 
 INSERT INTO grp_role VALUES
 (1,1),
