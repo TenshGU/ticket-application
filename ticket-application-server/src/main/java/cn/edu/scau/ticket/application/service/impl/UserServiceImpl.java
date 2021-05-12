@@ -19,10 +19,15 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
-import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @description:
@@ -31,6 +36,7 @@ import java.util.Set;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserMapper userMapper;
 
@@ -81,5 +87,74 @@ public class UserServiceImpl implements UserService {
         return ResultEntity
                 .getResultEntity(ResultStatus.FAILED)
                 .addInfo(map);
+    }
+
+    String code =null;
+    int width = 100;//图片宽度
+    int height = 50;//图片高度
+    Random random = new Random();
+    private String[] fontNames  = {"宋体", "微软雅黑", "Arial", "Tahoma", "Verdana", "微软雅黑", "Times New Roman"};
+
+    private Color randomColor() //产生随机颜色
+    {
+        int red = random.nextInt(256);
+        int green = random.nextInt(256);
+        int blue = random.nextInt(256);
+        return new Color(red, green, blue);
+    }
+
+    private Font randomFont() //产生随机字体
+    {
+        String fontName = fontNames[random.nextInt(fontNames.length)];
+        int style = random.nextInt(4);
+        int fontSize = random.nextInt(10) + 24;
+        return new Font(fontName, style, fontSize);
+    }
+
+    @Override
+    public void generateVerifyCode(HttpServletRequest req, HttpServletResponse response) throws IOException
+    {
+
+        response.setCharacterEncoding("utf-8");
+        BufferedImage image = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+        Graphics graphics = image.getGraphics();//画笔对象
+
+        //设置背景色
+        graphics.setColor(randomColor());
+        graphics.fillRect(0,0,width,height);
+
+        //画边框
+        graphics.setColor(Color.black);
+        graphics.drawRect(0,0,width - 1,height - 1);
+
+        String charSet = "0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//字符集
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 1; i <= 4; i++) //生成6位验证码
+        {
+            graphics.setColor(randomColor());
+            graphics.setFont(randomFont());
+            int index = random.nextInt(charSet.length());
+            stringBuffer.append(charSet.charAt(index));
+            graphics.drawString(charSet.charAt(index)+"",width/5*i,height/2);
+            //System.out.println(stringBuffer);
+            req.getSession().setAttribute("verifycode",stringBuffer);//存放到session里
+            System.out.println("123test  :"+req.getSession().getAttribute("verifycode"));
+            code=stringBuffer.toString();
+        }
+
+
+        //干扰背景
+        for (int i = 0; i < 10; i++)
+        {
+            graphics.setColor(randomColor());
+            graphics.drawLine(random.nextInt(width),random.nextInt(width),random.nextInt(height),random.nextInt(height));
+        }
+        //3.将图片输出到页面展示
+        ImageIO.write(image,"jpg",response.getOutputStream());
+    }
+
+
+    public String getCode() {
+        return code;
     }
 }

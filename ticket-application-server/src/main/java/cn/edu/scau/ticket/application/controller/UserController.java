@@ -9,6 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -35,5 +39,14 @@ public class UserController {
     @GetMapping("/myself/{username}")
     public ResultEntity myself(@PathVariable("username") Integer username) {
         return ResultEntity.getResultEntity(ResultStatus.SUCCESS);
+    }
+
+    @GetMapping("/verifycode")
+    public void generateCode(HttpServletRequest req, HttpServletResponse response) throws IOException {
+        response.setContentType("image/jpeg");
+        response.setHeader("Pragma","No-cache");
+        response.setHeader("Cache-Contro","no-cache");
+        response.setDateHeader("Expire",0);
+        this.userService.generateVerifyCode(req,response);
     }
 }

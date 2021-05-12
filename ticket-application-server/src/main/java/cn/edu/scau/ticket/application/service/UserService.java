@@ -5,6 +5,10 @@ import cn.edu.scau.ticket.application.beans.UserAuthority;
 import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -20,4 +24,8 @@ public interface UserService {
     ResultEntity saveUser(User user, MultipartFile file);
 
     ResultEntity validUserError(BindingResult bindingResult);
+
+    //生成验证码
+    void generateVerifyCode(HttpServletRequest req, HttpServletResponse response) throws IOException;
+    String getCode();
 }

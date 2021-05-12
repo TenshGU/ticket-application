@@ -70,7 +70,7 @@ class Login extends React.Component {
     const changeCode = (e) => {
       
       var date = new Date().getTime();
-      e.target.src = "http://localhost:8080/blog/user/verifycode?"+date;
+      e.target.src = "http://localhost:8080/verifycode?"+date;
       console.log(e.target);
       
     };
@@ -156,7 +156,7 @@ class Login extends React.Component {
                     placeholder="verify-code"
                     className="login-form-code"
                   />
-                  <img id="checkCode" onClick={changeCode} src="http://localhost:8080/blog/user/verifycode" />
+                  <img id="checkCode" onClick={changeCode} src="http://localhost:8080/verifycode" />
                   </Space>
                 </Form.Item>
                 

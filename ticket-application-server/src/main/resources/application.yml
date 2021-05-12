@@ -11,7 +11,7 @@ spring:
       prefix: /
       suffix: .html
   security:
-    release-path: [/index,/register,/toLogin,/toError,/test,/testUpload]
+    release-path: [/index,/register,/verifycode,/toLogin,/toError,/test,/testUpload]
   cache:
     cache-names: cache
     type: redis
