@@ -15,4 +15,6 @@ public interface UserMapper {
     int saveUser(User user);
 
     Set<UserAuthority> getUserAuthoritiesByUsername(String username);
+
+    List<String> getAllUsernames();
 }

@@ -1,4 +1,4 @@
-package cn.edu.scau.ticket.application.config;
+package cn.edu.scau.ticket.application.config.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -25,12 +25,9 @@ public class UserController {
     public ResultEntity register(@Validated User user, BindingResult bindingResult, @RequestPart(value = "headImg",required = false) MultipartFile headImg) {
         ResultEntity resultEntity = null;
         if (bindingResult.hasErrors()) {
-            Map<String, Object> map = userService.getUserValidErrorMsg(bindingResult);
-            resultEntity = ResultEntity.getResultEntity(ResultStatus.FAILED);
-            resultEntity.addInfo(map);
+            resultEntity = userService.validUserError(bindingResult);
         } else {
-            userService.saveUser(user,headImg);
-            resultEntity = ResultEntity.getResultEntity(ResultStatus.SUCCESS);
+            resultEntity = userService.saveUser(user,headImg);
         }
         return resultEntity;
     }

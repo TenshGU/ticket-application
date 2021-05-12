@@ -2,6 +2,8 @@ package cn.edu.scau.ticket.application.service.impl;
 
 import cn.edu.scau.ticket.application.beans.User;
 import cn.edu.scau.ticket.application.beans.UserAuthority;
+import cn.edu.scau.ticket.application.beans.result.ResultEntity;
+import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.mapper.AuthMapper;
 import cn.edu.scau.ticket.application.mapper.UserMapper;
 import cn.edu.scau.ticket.application.service.AuthService;
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService {
     private FastDFSUtil fastDFSUtil;
 
     @Override
-    public boolean saveUser(User user, MultipartFile file) {
+    public ResultEntity saveUser(User user, MultipartFile file) {
         String encryPassword = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(encryPassword);
         String image = null;
@@ -57,11 +59,12 @@ public class UserServiceImpl implements UserService {
         user.setGroupIds(groupIdsByRoleName);
 
         userMapper.saveUser(user);
-        return true;
+
+        return ResultEntity.getResultEntity(ResultStatus.SUCCESS);
     }
 
     @Override
-    public Map<String,Object> getUserValidErrorMsg(BindingResult bindingResult) {
+    public ResultEntity validUserError(BindingResult bindingResult) {
         Map<String, Object> map = new HashMap<>();
         List<ObjectError> allErrors = bindingResult.getAllErrors();
         for (ObjectError oe : allErrors) {
@@ -75,6 +78,8 @@ public class UserServiceImpl implements UserService {
             msg = oe.getDefaultMessage();
             map.put(key,msg);
         }
-        return map;
+        return ResultEntity
+                .getResultEntity(ResultStatus.FAILED)
+                .addInfo(map);
     }
 }

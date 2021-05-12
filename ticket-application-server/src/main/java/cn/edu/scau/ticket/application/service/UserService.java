@@ -2,6 +2,7 @@ package cn.edu.scau.ticket.application.service;
 
 import cn.edu.scau.ticket.application.beans.User;
 import cn.edu.scau.ticket.application.beans.UserAuthority;
+import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
@@ -16,7 +17,7 @@ public interface UserService {
 
     Set<UserAuthority> DEFAULT_AUTHORITIES = new HashSet<>(Collections.singletonList(new UserAuthority("commonUser")));
 
-    boolean saveUser(User user, MultipartFile file);
+    ResultEntity saveUser(User user, MultipartFile file);
 
-    Map<String, Object> getUserValidErrorMsg(BindingResult bindingResult);
+    ResultEntity validUserError(BindingResult bindingResult);
 }

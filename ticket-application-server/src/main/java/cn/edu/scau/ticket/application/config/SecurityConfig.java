@@ -1,5 +1,6 @@
 package cn.edu.scau.ticket.application.config;
 
+import cn.edu.scau.ticket.application.config.properties.ReleaseProperties;
 import cn.edu.scau.ticket.application.handler.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
