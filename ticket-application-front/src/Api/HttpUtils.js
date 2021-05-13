@@ -5,7 +5,7 @@ import { notification } from 'antd';
 import { createHashHistory } from 'history'; // 如果是hash路由
 import { createBrowserHistory } from 'history'; // 如果是history路由
 //
-const url = 'http://47.106.64.151:8848';
+const url = 'http://localhost:8080';
 const QN_URL = '';
 let isShowingNotify = false;
 

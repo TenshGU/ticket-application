@@ -3,15 +3,15 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql:///ticket?allowMultiQueries=true #jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+      url: jdbc:mysql://1.15.255.173:3306/ticket?serverTimezone=UTC&useSSL=true&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
       username: root
-      password: root #Ticket123?
+      password: Ticket123?
   mvc:
     view:
       prefix: /
       suffix: .html
   security:
-    release-path: [/index,/register,/toLogin,/toError,/test,/testUpload]
+    release-path: [/index,/register,/verifycode,/getCode,/toLogin,/toError,/test,/testUpload]
   cache:
     cache-names: cache
     type: redis

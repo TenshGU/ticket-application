@@ -1,4 +1,4 @@
-package cn.edu.scau.ticket.application.handler.security;
+package cn.edu.scau.ticket.application.security.filter;
 
 import cn.edu.scau.ticket.application.service.impl.UserDetailsServiceImpl;
 import cn.edu.scau.ticket.application.utils.JWTUtil;

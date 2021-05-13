@@ -1,10 +1,11 @@
-package cn.edu.scau.ticket.application.handler.security;
+package cn.edu.scau.ticket.application.security.handler;
 
 import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.utils.JWTUtil;
 import cn.edu.scau.ticket.application.utils.JsonWriter;
 import io.jsonwebtoken.Claims;
+import org.redisson.Redisson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 @Component
 public class WebAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
-    JWTUtil jwtUtil;
+    private JWTUtil jwtUtil;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {

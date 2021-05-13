@@ -1,29 +1,30 @@
 package cn.edu.scau.ticket.application.service.impl;
 
 import cn.edu.scau.ticket.application.beans.User;
-import cn.edu.scau.ticket.application.beans.UserAuthority;
 import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import cn.edu.scau.ticket.application.beans.result.ResultStatus;
-import cn.edu.scau.ticket.application.mapper.AuthMapper;
 import cn.edu.scau.ticket.application.mapper.UserMapper;
 import cn.edu.scau.ticket.application.service.AuthService;
 import cn.edu.scau.ticket.application.service.UserService;
 import cn.edu.scau.ticket.application.utils.FastDFSUtil;
 import cn.edu.scau.ticket.application.utils.JsonWriter;
+import cn.edu.scau.ticket.application.utils.NetWorkUtil;
+import cn.edu.scau.ticket.application.utils.VerifyCodeUtil;
+import org.redisson.Redisson;
+import org.redisson.api.RBucket;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.multipart.MultipartFile;
-import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -32,6 +33,7 @@ import java.util.Set;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserMapper userMapper;
 
@@ -42,7 +44,13 @@ public class UserServiceImpl implements UserService {
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
+    private VerifyCodeUtil verifyCodeUtil;
+
+    @Autowired
     private FastDFSUtil fastDFSUtil;
+
+    @Autowired
+    private Redisson redisson;
 
     @Override
     public ResultEntity saveUser(User user, MultipartFile file) {
@@ -97,5 +105,13 @@ public class UserServiceImpl implements UserService {
         return ResultEntity
                 .getResultEntity(ResultStatus.SUCCESS)
                 .addInfo(userInfo);
+    }
+
+    @Override
+    public void generateVerifyCode(HttpServletRequest request, HttpServletResponse response) {
+        String realIP = NetWorkUtil.getClientRealIP(request);
+        String vCode = verifyCodeUtil.generateVerifyCode(response);
+        RBucket<String> bucket = redisson.getBucket(realIP + ":login:vCode");
+        bucket.set(vCode, 1L, TimeUnit.MINUTES);
     }
 }

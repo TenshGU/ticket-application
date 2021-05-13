@@ -4,6 +4,10 @@ import cn.edu.scau.ticket.application.beans.User;
 import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.utils.FastDFSUtil;
+import cn.edu.scau.ticket.application.utils.NetWorkUtil;
+import cn.edu.scau.ticket.application.utils.VerifyCodeUtil;
+import org.redisson.Redisson;
+import org.redisson.api.RBucket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -12,6 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -23,6 +30,9 @@ import java.util.Map;
 public class TestController {
     @Autowired
     private FastDFSUtil fastDFSUtil;
+
+    @Autowired
+    private Redisson redisson;
 
     @GetMapping("/toLogin")
     public String toLogin() {
@@ -48,5 +58,12 @@ public class TestController {
     @GetMapping("/toError")
     public String error() {
         return "error";
+    }
+
+    @GetMapping("/getCode")
+    public String getCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String realIP = NetWorkUtil.getClientRealIP(request);
+        RBucket<String> bucket = redisson.getBucket(realIP + ":login:vCode");
+        return bucket.get();
     }
 }

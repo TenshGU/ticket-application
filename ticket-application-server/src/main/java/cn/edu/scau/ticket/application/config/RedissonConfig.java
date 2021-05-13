@@ -21,10 +21,10 @@ public class RedissonConfig {
     private String password;
 
     @Bean
-    public RedissonClient redissonClient() {
+    public Redisson redissonClient() {
         Config config = new Config();
         config.useSingleServer().setAddress(address);
         config.useSingleServer().setPassword(password);
-        return Redisson.create(config);
+        return (Redisson) Redisson.create(config);
     }
 }

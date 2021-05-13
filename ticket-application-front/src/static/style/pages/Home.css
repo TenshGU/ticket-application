@@ -10,7 +10,7 @@
   width: 120px;
   height: 31px;
   margin: 16px 24px 16px 0;
-  background-image: url("./logo.png");
+  background-image: url("../../images//logo.png");
   background-size: 100% 100%;
 }
 .ant-row-rtl #components-layout-demo-top .logo {

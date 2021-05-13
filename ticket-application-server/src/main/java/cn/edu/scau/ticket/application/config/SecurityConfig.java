@@ -1,7 +1,7 @@
 package cn.edu.scau.ticket.application.config;
 
 import cn.edu.scau.ticket.application.config.properties.ReleaseProperties;
-import cn.edu.scau.ticket.application.handler.security.JwtAuthenticationTokenFilter;
+import cn.edu.scau.ticket.application.security.filter.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.web.filter.GenericFilterBean;
 
 /**
  * @description:
@@ -68,9 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    @Autowired
+    private GenericFilterBean verifyCodeFilter;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(verifyCodeFilter, UsernamePasswordAuthenticationFilter.class);
         http
                 .csrf().disable()
                 //不再生成session，而是使用token

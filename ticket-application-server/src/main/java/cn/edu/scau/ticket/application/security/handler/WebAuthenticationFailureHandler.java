@@ -1,4 +1,4 @@
-package cn.edu.scau.ticket.application.handler.security;
+package cn.edu.scau.ticket.application.security.handler;
 
 import cn.edu.scau.ticket.application.beans.result.ResultEntity;
 import cn.edu.scau.ticket.application.beans.result.ResultStatus;

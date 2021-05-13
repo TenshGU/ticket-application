@@ -11,6 +11,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @description:
@@ -57,5 +59,15 @@ public class UserController {
     @GetMapping("/myself/{username}")
     public ResultEntity myself(@PathVariable("username") String username) {
         return userService.getUserInfo(username);
+    }
+
+    /**
+     * 生成验证码
+     * @param request
+     * @param response
+     */
+    @GetMapping("/verifycode")
+    public void generateCode(HttpServletRequest request, HttpServletResponse response) {
+        userService.generateVerifyCode(request,response);
     }
 }

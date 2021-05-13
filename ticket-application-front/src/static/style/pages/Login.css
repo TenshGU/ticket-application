@@ -1,7 +1,7 @@
 .login-body {
   height: calc(100vh);
   width: calc(100vw);
-  background-image: url("./loginpic.jpg");
+  background-image: url("../../images/loginpic.jpg");
   background-size: 100% 100%;
 
   display: flex;
@@ -34,23 +34,21 @@
 }
 
 .svg{
-    margin-left: 100px;
+    margin-left: 50px;
     position: relative;
 }
 
-.svg-p{
-  position:absolute;
-  left: -25px;
-  top: 40px;
-  font-family: 造字工房力黑（非商用）常规体;
-  font-weight: 500px;
-  color:dodgerblue
 
+.login-form-code{
+  width: 50px;
+  height: 50px;
 }
 
 .login-form-button{
   width: 100%;
 }
+
+
 
 .login-form-forgot{
   float: right;

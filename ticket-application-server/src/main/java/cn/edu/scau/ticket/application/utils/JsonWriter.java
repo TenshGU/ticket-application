@@ -18,9 +18,14 @@ import java.util.Map;
  * @createDate: 2021/4/6
  */
 public class JsonWriter {
-    public static void writeResultToResponse(HttpServletResponse httpServletResponse, ResultEntity resultEntity) throws IOException {
+    public static void writeResultToResponse(HttpServletResponse httpServletResponse, ResultEntity resultEntity) {
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        PrintWriter writer = httpServletResponse.getWriter();
+        PrintWriter writer = null;
+        try {
+            writer = httpServletResponse.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         writer.write(JSON.toJSONString(resultEntity));
         writer.flush();
         writer.close();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Layout, Breadcrumb } from 'antd';
-import './Home.css';
+import "../../static/style/pages/Home.css";
 import 'antd/dist/antd.css';
 import { BellTwoTone } from '@ant-design/icons'
 import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 
-class SiderDemo extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -119,12 +119,3 @@ class SiderDemo extends React.Component {
     )
   }
 }
-function App() {
-  return (
-    <div>
-      <SiderDemo></SiderDemo>
-    </div>
-  )
-}
-
-export default App
