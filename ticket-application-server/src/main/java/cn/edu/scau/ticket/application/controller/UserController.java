@@ -70,4 +70,9 @@ public class UserController {
     public void generateCode(HttpServletRequest request, HttpServletResponse response) {
         userService.generateVerifyCode(request,response);
     }
+
+    @GetMapping("/existUsername")
+    public boolean isExistUsername(String username) {
+        return userService.isExistUsername(username);
+    }
 }

@@ -11,6 +11,7 @@ import cn.edu.scau.ticket.application.utils.JsonWriter;
 import cn.edu.scau.ticket.application.utils.NetWorkUtil;
 import cn.edu.scau.ticket.application.utils.VerifyCodeUtil;
 import org.redisson.Redisson;
+import org.redisson.api.RBloomFilter;
 import org.redisson.api.RBucket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,6 +52,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private Redisson redisson;
+
+    @Autowired
+    private RBloomFilter<String> usernameBloomFilter;
 
     @Override
     public ResultEntity saveUser(User user, MultipartFile file) {
@@ -113,5 +117,10 @@ public class UserServiceImpl implements UserService {
         String vCode = verifyCodeUtil.generateVerifyCode(response);
         RBucket<String> bucket = redisson.getBucket(realIP + ":login:vCode");
         bucket.set(vCode, 1L, TimeUnit.MINUTES);
+    }
+
+    @Override
+    public boolean isExistUsername(String username) {
+        return usernameBloomFilter.contains(username);
     }
 }

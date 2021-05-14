@@ -27,4 +27,6 @@ public interface UserService {
     ResultEntity getUserInfo(String username);
 
     void generateVerifyCode(HttpServletRequest request, HttpServletResponse response);
+
+    boolean isExistUsername(String username);
 }

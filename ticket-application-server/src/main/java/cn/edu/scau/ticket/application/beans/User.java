@@ -40,6 +40,7 @@ public class User implements UserDetails {
 
     @NotNull(message = "手机号码不能为空")
     @Length(min = 11, max = 11, message = "手机号码长度不正确")
+    @Pattern(regexp = "^[0-9]{11}$", message = "手机号码格式不正确")
     private String phone;
 
     @NotNull(message = "名不能为空")
