@@ -20,7 +20,7 @@ import java.io.IOException;
 public class WebAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        ResultEntity loginFail = ResultEntity.getResultEntity(ResultStatus.LOGIN_FAIL);
+        ResultEntity loginFail = ResultEntity.getResultEntity(ResultStatus.LOGIN_FAIL).addInfo("error","账号或密码错误");
         JsonWriter.writeResultToResponse(httpServletResponse,loginFail);
     }
 }

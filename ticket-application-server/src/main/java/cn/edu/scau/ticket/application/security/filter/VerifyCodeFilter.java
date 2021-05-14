@@ -42,8 +42,8 @@ public class VerifyCodeFilter extends GenericFilterBean {
             RBucket<String> bucket = redisson.getBucket(realIP + ":login:vCode");
             String code = bucket.get();
             if (!StringUtils.hasText(inputCode) || !inputCode.equalsIgnoreCase(code)) {
-                ResultEntity resultEntity = ResultEntity.getResultEntity(ResultStatus.FAILED);
-                resultEntity.addInfo("vCode","验证码错误");
+                ResultEntity resultEntity = ResultEntity.getResultEntity(ResultStatus.LOGIN_FAIL);
+                resultEntity.addInfo("error","验证码错误");
                 JsonWriter.writeResultToResponse(resp, resultEntity);
                 return;
             }
