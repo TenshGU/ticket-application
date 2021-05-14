@@ -65,7 +65,7 @@ CREATE TABLE `user` (
     gender CHAR(1) DEFAULT 'M' COMMENT '性别',
     age INT(3) NOT NULL COMMENT '年龄',
     email VARCHAR(64) COMMENT '邮箱',
-    image VARCHAR(64) COMMENT '头像'
+    image VARCHAR(600) COMMENT '头像'
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `order` (

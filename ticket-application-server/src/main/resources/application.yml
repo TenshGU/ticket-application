@@ -47,6 +47,8 @@ fdfs:
   pool:
     max-total: 200
     max-total-per-key: 50
+  headUrl: ENC(L1bs6395YlTGnuTSClnNAc9Z6cAL/VzaMUXupVnBEsU=)
+  defaultImg: group1/M00/00/00/eQXtRWCXOLuAXoD5AAAMz79eafk023.jpg
 
 jasypt:
   encryptor:

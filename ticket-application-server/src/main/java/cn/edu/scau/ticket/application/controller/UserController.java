@@ -71,6 +71,11 @@ public class UserController {
         userService.generateVerifyCode(request,response);
     }
 
+    /**
+     * 是否存在用户名
+     * @param username 用户名
+     * @return 结果值
+     */
     @GetMapping("/existUsername")
     public boolean isExistUsername(String username) {
         return userService.isExistUsername(username);
