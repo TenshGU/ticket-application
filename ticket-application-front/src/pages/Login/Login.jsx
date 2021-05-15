@@ -28,34 +28,25 @@ class Login extends React.Component {
   }
 
   render() {
-    
+    //表单提交
     const onFinish = (values) => {
-
-      axios
-          .get("http://localhost:8080/blog/user/login", {
-            params: { username: values.username,
+      axios.defaults.withCredentials = true
+          axios({
+            method: "post",
+            url: "http://localhost:8080/login",
+            params: {
+              username: values.username,
               password: values.password,
-              code: values.code },
+              vCode: values.code,
+            },
           })
-          .then((res) => {
-            if(res.data != null){
-              if(res.data.msg=="账号或者密码错误"){
-                message.error(res.data.msg);
-              }
-              else if(res.data.msg=="验证码错误"){
-                message.error(res.data.msg);
-              }
-              else{
-                sessionStorage.setItem('username',values.username);
-                this.props.history.push("/home/index");
-              }
-            }
-            console.log(res);
-
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+            .then((res) => {
+              console.log(res)
+              message.success("登录成功！");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
     };
 
     const forgetPW = (e) => {
@@ -180,7 +171,7 @@ class Login extends React.Component {
                   </Button>
                 </Form.Item>
                 <div style={{textAlign:'center'}}>
-                  还没有账号？<a href="#/register">去注册</a>
+                  还没有账号？<a href="#/register">去注册👉</a>
                 </div>
               </Form>
             </Card>

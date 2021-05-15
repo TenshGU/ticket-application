@@ -3,7 +3,6 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import 'antd/dist/antd.css';
-import { get, post, showNotification } from './../Api/HttpUtils';
 import Home from './Home/Home';
 class App extends React.Component {
   render() {

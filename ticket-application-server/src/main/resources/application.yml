@@ -23,6 +23,7 @@ spring:
     address: ENC(0zoiyvk5L7ZblC9Vow99jD8ThT00N4hdeHYnPN7qqlmkVZMTWac3eQfu2yxJDHbNbYUvVDsfjUC32ZYOaj3Z0lv3uD70AisY)
     password: ENC(AVICKI0eW6JlZ+04W0Yxf4wF4+zNJOi0)
 
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.edu.scau.ticket.application.*
