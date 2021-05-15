@@ -63,8 +63,11 @@ public class UserServiceImpl implements UserService {
         String image = null;
         try {
             image = fastDFSUtil.uploadFile(file,true);
+            if (image == null) {
+                image = fastDFSUtil.getDefaultImgUrl();
+            }
         } catch (Exception e) {
-            image = DEFAULT_IMG_PATH;
+            image = fastDFSUtil.getDefaultImgUrl();
         }
         //设置图片url
         user.setImage(image);
@@ -73,7 +76,6 @@ public class UserServiceImpl implements UserService {
         //设置组id
         List<Integer> groupIdsByRoleName = authService.getGroupIdsByRoleName(DEFAULT_AUTHORITIES);
         user.setGroupIds(groupIdsByRoleName);
-
         userMapper.saveUser(user);
 
         return ResultEntity.getResultEntity(ResultStatus.SUCCESS);

@@ -4,7 +4,9 @@ import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.upload.FastImageFile;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,9 +21,16 @@ import java.util.Set;
  * @createDate: 2021/5/7
  */
 @Component
+@Data
 public class FastDFSUtil {
     @Autowired
     private FastFileStorageClient fastFileStorageClient;
+
+    @Value("${fdfs.headUrl}")
+    private String headUrl;
+
+    @Value("${fdfs.defaultImg}")
+    private String imgPath;
 
     private String uploadFile(byte[] bytes, long size, String extension, boolean isImage) throws Exception {
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
@@ -50,7 +59,7 @@ public class FastDFSUtil {
             long size = file.getSize();
             String originalFilename = file.getOriginalFilename();
             String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-            return this.uploadFile(bytes,size,extension,isImage);
+            return headUrl + this.uploadFile(bytes,size,extension,isImage);
         }
         return null;
     }
@@ -63,5 +72,9 @@ public class FastDFSUtil {
         if(StringUtils.hasLength(filePath)) {
             fastFileStorageClient.deleteFile(filePath);
         }
+    }
+
+    public String getDefaultImgUrl() {
+        return this.headUrl + this.imgPath;
     }
 }
