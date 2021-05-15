@@ -110,14 +110,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(webAuthenticationEntryPoint)
                 .accessDeniedHandler(webAccessDeniedHandler);
-<<<<<<< HEAD
 
 
         http.cors();
-=======
-            
-          http.cors();
->>>>>>> 4f88c40b9bbe952c97a88f41a406178094ba0641
     }
 
     @Override
