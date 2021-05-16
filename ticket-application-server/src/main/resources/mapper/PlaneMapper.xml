@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.scau.ticket.application.mapper.PlaneMapper">
+    <resultMap id="planeRM" type="plane">
+        <association property="company"
+                     select="cn.edu.scau.ticket.application.mapper.CompanyMapper.getCompanyByName"
+                     column="company_name"/>
+    </resultMap>
+
+    <select id="getPlaneById" resultMap="planeRM">
+        select * from plane where id = #{id}
+    </select>
+</mapper>

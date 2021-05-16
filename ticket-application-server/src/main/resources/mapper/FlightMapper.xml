@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.scau.ticket.application.mapper.FlightMapper">
+    <insert id="insertFlight" keyColumn="id" keyProperty="id">
+        insert into flight
+        values (#{id},#{name},#{leaveTime},
+                #{arriveTime},#{leaveAirportName},
+                #{arriveAirportName},#{stock},#{price},#{plane.id})
+    </insert>
+
+    <delete id="deleteFlightById" parameterType="string">
+        delete from flight
+        where id = #{id}
+    </delete>
+
+    <resultMap id="flightRM" type="flight">
+        <association property="plane"
+                     select="cn.edu.scau.ticket.application.mapper.PlaneMapper.getPlaneById"
+                     column="plane_id"/>
+    </resultMap>
+
+    <select id="getFlightByCondition" parameterType="flightCriteria" resultMap="flightRM">
+        select * from flight
+        <trim prefix="where" suffixOverrides="and">
+            stock > 0 and
+            <if test="leaveTime != null">leave_time &gt;= #{leaveTime} and</if>
+            <if test="arriveTime != null">arrive_time &lt;= #{arriveTime} and</if>
+            <if test="leaveAirportName != null">leave_airport_name=#{leaveAirportName} and</if>
+            <if test="arriveAirportName != null">arrive_airport_name=#{arriveAirportName}</if>
+        </trim>
+    </select>
+
+    <update id="updateFlight">
+        update flight
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="leaveTime != null">leave_time=#{leaveTime},</if>
+            <if test="arriveTime != null">arrive_time=#{arriveTime},</if>
+            <if test="leaveAirportName != null">leave_airport_name=#{leaveAirportName},</if>
+            <if test="arriveAirportName != null">arrive_airport_name=#{arriveAirportName},</if>
+            <if test="stock != null">stock=#{stock},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="plane != null">plane_id=#{plane.id}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getFlightById" resultMap="flightRM">
+        select * from flight
+        where id = #{id}
+    </select>
+</mapper>

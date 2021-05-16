@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.scau.ticket.application.mapper.OrderMapper">
+    <insert id="insertOrder" parameterType="order">
+        insert into `order`
+        values (#{id},#{orderTime},#{price},#{username},#{flight.id})
+    </insert>
+
+    <resultMap id="ordersRM" type="order">
+        <association property="flight"
+                     select="cn.edu.scau.ticket.application.mapper.FlightMapper.getFlightById"
+                     column="flight_id"/>
+    </resultMap>
+
+    <select id="getOrdersByUsername" resultMap="ordersRM">
+        select * from `order`
+        where username = #{username}
+    </select>
+
+</mapper>
