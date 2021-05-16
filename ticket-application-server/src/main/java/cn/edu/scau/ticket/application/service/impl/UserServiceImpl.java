@@ -6,10 +6,7 @@ import cn.edu.scau.ticket.application.beans.result.ResultStatus;
 import cn.edu.scau.ticket.application.mapper.UserMapper;
 import cn.edu.scau.ticket.application.service.AuthService;
 import cn.edu.scau.ticket.application.service.UserService;
-import cn.edu.scau.ticket.application.utils.FastDFSUtil;
-import cn.edu.scau.ticket.application.utils.JsonWriter;
-import cn.edu.scau.ticket.application.utils.NetWorkUtil;
-import cn.edu.scau.ticket.application.utils.VerifyCodeUtil;
+import cn.edu.scau.ticket.application.utils.*;
 import org.redisson.Redisson;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RBucket;
@@ -55,6 +52,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RBloomFilter<String> usernameBloomFilter;
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @Override
     public ResultEntity saveUser(User user, MultipartFile file) {
@@ -124,5 +124,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isExistUsername(String username) {
         return usernameBloomFilter.contains(username);
+    }
+
+    @Override
+    public String getUsernameFromToken(HttpServletRequest request) {
+        String token = request.getHeader(jwtUtil.getHeader());
+        return jwtUtil.getUsernameFromToken(token);
     }
 }

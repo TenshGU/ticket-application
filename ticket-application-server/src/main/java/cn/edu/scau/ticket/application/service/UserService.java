@@ -27,4 +27,6 @@ public interface UserService {
     void generateVerifyCode(HttpServletRequest request, HttpServletResponse response);
 
     boolean isExistUsername(String username);
+
+    String getUsernameFromToken(HttpServletRequest request);
 }

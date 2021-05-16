@@ -45,8 +45,7 @@ public class UserController {
      */
     @GetMapping("/myself")
     public ResultEntity myself(HttpServletRequest httpRequest) {
-        String token = httpRequest.getHeader(jwtUtil.getHeader());
-        String username = jwtUtil.getUsernameFromToken(token);
+        String username = userService.getUsernameFromToken(httpRequest);
         return userService.getUserInfo(username);
     }
 

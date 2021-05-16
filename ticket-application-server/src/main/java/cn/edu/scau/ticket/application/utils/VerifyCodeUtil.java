@@ -72,7 +72,7 @@ public class VerifyCodeUtil {
         graphics.drawRect(0,0,WIDTH - 1,HEIGHT - 1);
 
         StringBuilder sb = new StringBuilder();
-        //生成4位验证码
+        //生成6位验证码
         for (int i = 1; i <= 4; i++) {
             graphics.setColor(randomColor());
             graphics.setFont(randomFont());
@@ -80,7 +80,7 @@ public class VerifyCodeUtil {
             sb.append(CHARSET.charAt(index));
             graphics.drawString(CHARSET.charAt(index)+"",WIDTH/5*i,HEIGHT/2);
         }
-        //获得4位验证码
+        //获得6位验证码
         String code = sb.toString();
 
         //干扰背景
