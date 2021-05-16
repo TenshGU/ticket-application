@@ -11,7 +11,7 @@ spring:
       prefix: /
       suffix: .html
   security:
-    release-path: [/index,/register,/verifycode,/existUsername,/getCode,/toLogin,/toError,/test,/testUpload]
+    release-path: [/index,/register,/verifycode,/existUsername,/getCode,/toLogin,/toError,/test,/testUpload,/alipay,/alipay/notify,/alipay/return]
   cache:
     cache-names: cache
     type: redis
@@ -23,7 +23,6 @@ spring:
     address: ENC(0zoiyvk5L7ZblC9Vow99jD8ThT00N4hdeHYnPN7qqlmkVZMTWac3eQfu2yxJDHbNbYUvVDsfjUC32ZYOaj3Z0lv3uD70AisY)
     password: ENC(AVICKI0eW6JlZ+04W0Yxf4wF4+zNJOi0)
 
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.edu.scau.ticket.application.*
@@ -31,11 +30,12 @@ mybatis:
     map-underscore-to-camel-case: true
     cache-enabled: true
     use-generated-keys: true
+    auto-mapping-behavior: partial
 
 token:
   header: bear
   secret: ticket...
-  expireTime: 30
+  expireTime: 300
   issuer: ticket-application
 
 fdfs:
@@ -61,3 +61,23 @@ bloomFilter:
   username:
     expectedInsertions: 100000
     falseProbability: 0.005
+
+alipay:
+  app_id: ENC(ZApuJvA87HJvEl2j/N3/z61yv5BGX9UBaTD+BBo2eug=)
+  private_key: ENC(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)
+  public_key: ENC(XUAQNUGtLVJ6DFezrov/v9iYcfO0pxPr/9iyj4tlAU6N5HmUFaf7qBouEIWsKDqqr9GoSvv0+wXdL0YexRNrH9kXiaD6elzxXvPsdvNX2Y7ImNFKY4MqX5eF/P7RamKsGcQMQ0GQt/Bnww7rDSLhCCOAKLvOHhXwznn0WX9dPTtW49Vf76a+dzJJ51Kga3o60ImqcyUarq1aCCylYLr7EqvYiFjOl/ga1cDzeRdT3yEUJR7S1UzSBp/a0bDteqHF4g51dED6Ww3yyXMwkcweRl1IEoado8AK6hLXIr7Pw/+6knsri70TZA==)
+  return_url: http://172.16.110.152:8080/alipay/return
+  notify_url: http://172.16.110.152:8080/alipay/notify
+  format: JSON
+  sign_type: RSA2
+  charset: utf-8
+  gateway_url: https://openapi.alipaydev.com/gateway.do
+  log_path: D:\\payment_log
+logging:
+  level:
+    cn:
+      edu:
+        scau:
+          ticket:
+            application:
+              mapper: debug
