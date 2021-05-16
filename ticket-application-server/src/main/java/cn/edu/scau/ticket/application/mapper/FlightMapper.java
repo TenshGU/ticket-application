@@ -15,4 +15,6 @@ public interface FlightMapper {
     List<Flight> getFlightByCondition(FlightCriteria flightCriteria);
 
     int updateFlight(Flight flight);
+
+    int decFlightStockById(String flightId);
 }

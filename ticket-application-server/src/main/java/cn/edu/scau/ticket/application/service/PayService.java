@@ -9,5 +9,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface PayService {
     void sendPayment(Flight flight, String username, HttpServletResponse response);
 
-    ResultEntity validAndSaveOrder(String username, HttpServletRequest request);
+    ResultEntity validAndSaveOrder(HttpServletRequest request);
 }

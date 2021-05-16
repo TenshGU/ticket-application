@@ -51,4 +51,10 @@
         select * from flight
         where id = #{id}
     </select>
+    
+    <update id="decFlightStockById">
+        update flight
+        set stock = stock - 1
+        where id = #{flightId}
+    </update>
 </mapper>

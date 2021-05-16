@@ -21,9 +21,6 @@ public class PayController {
     @Autowired
     private PayService payService;
 
-    @Autowired
-    private UserService userService;
-
     @PostMapping("/alipay/notify")
     public String alipayNotify() {
         return "success";
@@ -35,7 +32,6 @@ public class PayController {
      */
     @GetMapping("/alipay/return")
     public ResultEntity alipayReturn(HttpServletRequest request) {
-        String username = userService.getUsernameFromToken(request);
-        return payService.validAndSaveOrder(username,request);
+        return payService.validAndSaveOrder(request);
     }
 }

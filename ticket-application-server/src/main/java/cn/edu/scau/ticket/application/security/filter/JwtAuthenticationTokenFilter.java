@@ -1,5 +1,6 @@
 package cn.edu.scau.ticket.application.security.filter;
 
+import cn.edu.scau.ticket.application.config.AliPayConfig;
 import cn.edu.scau.ticket.application.service.impl.UserDetailsServiceImpl;
 import cn.edu.scau.ticket.application.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private AliPayConfig aliPayConfig;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
