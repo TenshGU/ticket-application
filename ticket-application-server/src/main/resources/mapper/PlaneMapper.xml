@@ -12,4 +12,8 @@
     <select id="getPlaneById" resultMap="planeRM">
         select * from plane where id = #{id}
     </select>
+
+    <select id="getAllPlanes" resultMap="planeRM">
+        select * from plane
+    </select>
 </mapper>
