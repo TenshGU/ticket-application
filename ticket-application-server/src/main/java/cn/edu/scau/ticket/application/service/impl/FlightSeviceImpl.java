@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @description:
@@ -23,6 +24,7 @@ public class FlightSeviceImpl implements FlightService {
 
     @Override
     public ResultEntity addFlight(Flight flight) {
+        flight.setId(UUID.randomUUID().toString());
         flightMapper.insertFlight(flight);
         return ResultEntity.getResultEntity(ResultStatus.SUCCESS);
     }
