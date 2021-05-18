@@ -9,7 +9,7 @@ import {
   Select,
   Upload,
   Button,
-  InputNumber
+  InputNumber,
 } from "antd";
 import "./../../static/style/pages/Register.css";
 import axios from "axios";
@@ -64,8 +64,8 @@ class Login extends React.Component {
     }
     if (info.file.status === "done") {
       // Get this url from response in real world.
-      console.log("123axc")
-      console.log(info.file.originFileObj)
+      console.log("123axc");
+      console.log(info.file.originFileObj);
       getBase64(info.file.originFileObj, (imageUrl) =>
         this.setState({
           imageUrl,
@@ -93,20 +93,20 @@ class Login extends React.Component {
     //这两行是性别选择框的,select的值不会直接给到Form.item,读不到下拉框的值,所以要通过这个函数
     const formRef = React.createRef();
     const onGenderChange = (value) => {
-    switch (value) {
-      case 'M':
-        this.formRef.current.setFieldsValue({
-          gender: 'M',
-        });
-        return;
+      switch (value) {
+        case "M":
+          this.formRef.current.setFieldsValue({
+            gender: "M",
+          });
+          return;
 
-      case 'F':
-        this.formRef.current.setFieldsValue({
-          gender: 'F',
-        });
-        return;
-    }
-  };
+        case "F":
+          this.formRef.current.setFieldsValue({
+            gender: "F",
+          });
+          return;
+      }
+    };
     return (
       <div id="app">
         <div className="container">
@@ -117,7 +117,7 @@ class Login extends React.Component {
               style={{ borderRadius: "100%" }}
             />
           </div>
-          <div className="card" style={{ backgroundColor: "white" }}>
+          <div className="card">
             <div className="card-header">
               <h4>注册</h4>
             </div>
@@ -130,6 +130,7 @@ class Login extends React.Component {
                 }}
                 onFinish={onFinish}
               >
+                {/* 第一行 */}
                 <Row style={{ marginLeft: "25px", marginRight: "25px" }}>
                   <Col
                     xs={{ span: 24 }}
@@ -327,7 +328,7 @@ class Login extends React.Component {
                     </Form.Item>
                   </Col>
                 </Row>
-                {/* 第三四行 */}
+                {/* 第四行 */}
                 <Row style={{ marginLeft: "25px", marginRight: "25px" }}>
                   <Col
                     xs={{ span: 24 }}
@@ -343,14 +344,19 @@ class Login extends React.Component {
                       rules={[
                         {
                           required: true,
-                          type:"number",
+                          type: "number",
                           min: 10,
                           max: 150,
                           message: "年龄必须是数字，范围10~150",
                         },
                       ]}
                     >
-                      <InputNumber min={1} max={150} allowClear style={{width:'100%'}}/>
+                      <InputNumber
+                        min={1}
+                        max={150}
+                        allowClear
+                        style={{ width: "100%" }}
+                      />
                     </Form.Item>
                   </Col>
                   <Col
@@ -433,13 +439,11 @@ class Login extends React.Component {
                   <Col span={1}></Col>
                 </Row>
               </Form>
+              {/* 最后一行 */}
+              <div classNamae="under-card" style={{ textAlign: "center" }}>
+                已经有账号？<a href="#/login">马上登录👉</a>
+              </div>
             </div>
-          </div>
-          <div
-            classNamae="under-card"
-            style={{ textAlign: "center", marginTop: 10 }}
-          >
-            已经有账号？<a href="#/login">马上登录👉</a>
           </div>
         </div>
       </div>

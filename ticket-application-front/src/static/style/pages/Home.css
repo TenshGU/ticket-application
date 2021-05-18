@@ -1,10 +1,10 @@
-
-
-.site-layout-content {
-  min-height: 280px;
-  padding: 24px;
-  background: #fff;
+*{
+  padding:0;
+  margin: 0;
+  border:0
 }
+
+
 .layout .logo {
   float: left;
   width: 120px;
@@ -13,10 +13,126 @@
   background-image: url("../../images//logo.png");
   background-size: 100% 100%;
 }
+
 .ant-row-rtl #components-layout-demo-top .logo {
   float: right;
   margin: 16px 0 16px 24px;
 }
+
 .top-menu{
   float: right;
+}
+
+
+.contentStyle{
+  height: 160px;
+  color: #fff;
+  line-height: 160px;
+  text-align: center;
+  background: #364d79;
+}
+
+.header{
+  background-color: #fff;
+  height: 255px;
+}
+.header-bo{
+  
+  padding-left: 0;
+  margin-left: 0;
+  
+}
+
+.card1 {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+  margin-top: 16px;
+  border-top: #3983E5 2px solid;
+}
+
+.card2 {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+  margin-top: 30px;
+  border-top: #3983E5 2px solid;
+}
+
+.gridStyle{
+  width: 25%;
+  text-align: center; 
+}
+
+
+.anchor{
+  position: fixed;
+  width: 50px;
+  left: 5%;
+  top: 50%;
+}
+
+.hot{
+  font-family: "Microsoft YaHei", SimHei, SimSun, Tahoma, Verdana, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.cold{
+  font-family: "Microsoft YaHei", SimHei, SimSun, Tahoma, Verdana, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #06c;
+}
+
+.gridStyle1{
+  width: 22%;
+  height: 130px;
+  margin: 10px 10px;
+  padding:15px 15px;
+  background-color: #f8f8f8;
+
+}
+
+.place{
+  color: #333;
+  font-size: 13px;
+}
+
+.date{
+  color: #666;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.placeicon{
+  margin: 0 5px;
+  font-size: 10px;
+}
+.date-icon{
+  margin: 0 5px;
+  font-size: 10px;
+}
+
+
+.money{
+  color: #f60;
+  font-size: 22px;
+  margin: 0px 5px;
+}
+
+.cardButton1{
+
+  position: relative;
+  left: 40px;
+  background-color: #ffb000;
+  color: white;
+  font-weight: 400;
+  text-align: right;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+
 }

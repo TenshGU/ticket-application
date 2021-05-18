@@ -1,121 +1,345 @@
-import React from 'react';
-import { Menu, Layout, Breadcrumb } from 'antd';
+import React from "react";
+import {
+  Menu,
+  Layout,
+  Breadcrumb,
+  Carousel,
+  Image,
+  Row,
+  Col,
+  Card,
+  Anchor,
+  Button,
+  message,
+} from "antd";
 import "../../static/style/pages/Home.css";
-import 'antd/dist/antd.css';
-import { BellTwoTone } from '@ant-design/icons'
-import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
-
+import "antd/dist/antd.css";
+import axios from "axios";
+import {
+  BellTwoTone,
+  SendOutlined,
+  ToTopOutlined,
+  FireOutlined,
+  SwapOutlined,
+} from "@ant-design/icons";
+import { Switch, Route, NavLink, Redirect,Link } from "react-router-dom";
+import Head from "../../components/Head";
+import bo1 from "../../static/images/bo1.jpg";
+import bo2 from "../../static/images/bo2.jpg";
+import bo3 from "../../static/images/bo3.jpg";
+import bo4 from "../../static/images/bo4.jpg";
+import hot1 from "../../static/images/hot1.png";
+import hot2 from "../../static/images/hot2.png";
+import hot3 from "../../static/images/hot3.png";
+import hot4 from "../../static/images/hot4.png";
+import hot5 from "../../static/images/hot5.png";
+import hot6 from "../../static/images/hot6.png";
+import hot7 from "../../static/images/hot7.png";
+import hot8 from "../../static/images/hot8.png";
+import hot11 from "../../static/images/hot11.png";
+import hot12 from "../../static/images/hot12.png";
+import hot13 from "../../static/images/hot13.png";
+import hot14 from "../../static/images/hot14.png";
+import hot15 from "../../static/images/hot15.png";
+import hot16 from "../../static/images/hot16.png";
+import hot17 from "../../static/images/hot17.png";
+import hot18 from "../../static/images/hot18.png";
 
 const { Header, Content, Footer } = Layout;
 
+const tabList = [
+  {
+    key: "tab1",
+    tab: "境内",
+  },
+  {
+    key: "tab2",
+    tab: "日本",
+  },
+];
+
 export default class Home extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      current: 'EventTrace',
-      //admin: localStorage.getItem('username') === 'admin' ? true : false
-      admin: true
-    }
+      key: "tab1",
+      noTitleKey: "app",
+    };
   }
 
-  //使得页面跳转和刷新时，导航作出对应的高亮
   componentDidMount = () => {
-    // let moren = this.props.location.pathname;
-    let moren = window.location.href
-    console.log(moren)
-    let highLight = moren.substring(moren.lastIndexOf('/') + 1, moren.length)
-    if (moren.includes('PublicManage')) {
-      highLight = 'PublicManage'
-    }
-    if (moren.includes('EventFiles')) {
-      highLight = 'EventTrace'
-    }
-    if (moren.includes('MonitorCheckData')) {
-      highLight = 'PublicMonitor'
-    }
-    this.setState({
-      current: highLight
-    })
-    // console.log(this.state.current)
-    //url发现变化时
-    window.addEventListener('hashchange', event => {
-      let test = event.newURL
-      // console.log(event)
-      let text = test.substring(test.lastIndexOf('/') + 1, test.length)
-      this.setState({
-        current: text
+    axios
+      .get("http://localhost:8080/flight", {
+        headers: {
+          bear: sessionStorage.getItem("bear"),
+        },
       })
-      if (text === 'EventFiles') {
-        this.setState({
-          current: 'EventTrace'
-        })
-      }
-      if (text === 'MonitorCheckData') {
-        this.setState({
-          current: 'PublicMonitor'
-        })
-      }
-      if (test.includes('DisposalReference')) {
-        this.setState({
-          current: 'PublicManage'
-        })
-      }
-      if (test.includes('PublicManage')) {
-        this.setState({
-          current: 'PublicManage'
-        })
-      }
-    })
-  }
+      .then((res) => {
+        if (res.data.code==200) {
+          this.setState({
+            total: res.data.infoMap.toal,
+            flights: res.data.infoMap.flights,
+          });
+          console.log(res.data.infoMap);
+        }
+        else{
+          message.warning("请重新登录。")
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  handleClickFun = (e, link) => {
+    e.preventDefault();
+    if (link.href) {
+      // 找到锚点对应得的节点
+      let element = document.getElementById(link.href);
+      // 如果对应id的锚点存在，就跳滚动到锚点顶部
+      element && element.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  };
+
+  clicka = (e) => {
+    console.log(e.target);
+    this.props.history.push("/BuyTicket");
+  };
+
+  onTabChange = (key, type) => {
+    console.log(key, type);
+    this.setState({ [type]: key });
+  };
 
   render() {
     return (
+      <div>
+        <div className="anchor">
+          <Anchor showInkInFixed="true" onClick={this.handleClickFun}>
+            <Anchor.Link href="#top" title={<ToTopOutlined />} />
+            <Anchor.Link href="#card1" title={<FireOutlined />} />
+            <Anchor.Link href="#card2" title={<SendOutlined />} />
+          </Anchor>
+        </div>
 
-      <Layout className="layout">
-        <Header className="header">
-          <div className="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} className="top-menu">
-            <Menu.Item key="1" className="top-menu-item">
-              <svg t="1617889997514" class="icon" viewBox="200 -100 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11444" width="20" height="15"><path d="M512.104171 127.71353c51.460427 0 97.920651 20.834181 131.463683 54.585554 33.751373 33.751373 54.585554 80.211597 54.585554 131.463683 0 51.460427-20.834181 97.920651-54.585554 131.463683-33.751373 33.751373-80.211597 54.585554-131.463683 54.585554-51.460427 0-97.920651-20.834181-131.463683-54.585554-33.751373-33.751373-54.585554-80.211597-54.585554-131.463683 0-51.460427 20.834181-97.920651 54.585554-131.463683 33.543032-33.751373 80.003255-54.585554 131.463683-54.585554z" fill="#29B6F6" p-id="11445"></path><path d="M584.398779 500.020346h-144.172533c-59.7941 0-115.00468 21.667548-155.006307 56.877314-38.543235 34.168057-62.710885 81.044964-62.710885 133.755443v157.714751c173.75707 48.3353 408.974975 76.461445 578.981892 2.083418v-159.589827c0-115.421363-109.171109-190.841099-217.092167-190.841099z" fill="#0288D1" p-id="11446"></path><path d="M554.397558 500.020346c1.041709 0.625025 2.29176 1.458393 3.125128 2.500102 4.375178 3.958494 7.083622 9.583723 7.083621 16.042319l-1.458392 6.250254-23.542625 46.460224v0.208342l12.500509 164.798372c0.208342 1.875076 0 3.750153-0.625026 5.416887-0.416684 1.458393-1.041709 2.708444-1.666734 3.750153l-25.626043 34.793082c-1.458393 2.083418-3.333469 3.541811-5.625229 4.58352-2.083418 1.041709-4.375178 1.666734-6.87528 1.666735-2.500102 0-4.791862-0.625025-7.083621-1.666735s-4.166836-2.916785-5.625229-5.000203L475.644354 745.863683v-0.208342c-1.041709-1.458393-1.666734-2.916785-2.083418-4.58352-0.416684-1.458393-0.625025-2.916785-0.625026-4.166836v-1.041709l11.667142-164.798373c0.625025-3.333469-20.209156-40.834995-23.542625-46.876907l-1.666734-6.250254c0-6.250254 2.708444-11.875483 7.083621-15.833978 1.041709-1.041709 2.083418-1.875076 3.333469-2.500102l84.586775 0.416684z" fill="#29B6F6" p-id="11447"></path><path d="M520.646185 225.009156l2.083418-4.166837c1.250051-2.500102 3.125127-4.58352 5.000204-6.250254 2.083418-1.666734 4.58352-3.125127 7.083621-3.958494 2.708444-0.833367 5.416887-1.041709 8.125331-0.833368 2.500102 0.208342 5.208545 1.041709 7.708647 2.29176h0.208342l20.209155 10.625433c5.208545 2.708444 8.750356 7.083622 10.208749 12.083825 1.666734 5.000203 1.250051 10.625432-1.250051 15.625636v0.208341l-2.500102 5.000204c1.250051 1.458393 2.500102 3.125127 3.750153 4.791861 1.250051 1.666734 2.29176 3.125127 3.333469 4.791862l5.625229-1.041709c5.625229-1.041709 11.042116 0.208342 15.625636 3.125127 4.375178 2.916785 7.708647 7.708647 8.750356 13.333876l4.375178 22.500916c1.041709 5.625229-0.208342 11.042116-3.125127 15.417294-2.916785 4.375178-7.500305 7.708647-13.333876 8.750356l-5.833571 1.041709-1.250051 5.625229c-0.416684 1.875076-1.041709 3.750153-1.666734 5.625229l4.58352 3.958494c2.083418 1.666734 3.750153 3.958494 5.000203 6.250254 1.250051 2.500102 2.083418 5.000203 2.29176 7.708647v3.750153c-0.208342 1.250051-0.416684 2.500102-0.625025 3.333469-0.416684 1.458393-1.041709 2.916785-1.666735 4.375178-0.625025 1.250051-1.458393 2.500102-2.500102 3.750152l-15.00061 17.500713c-3.750153 4.375178-8.958698 6.87528-14.167243 7.291963-5.208545 0.416684-10.625432-1.250051-15.000611-5.000203l-4.375178-3.750153c-1.666734 0.833367-3.541811 1.875076-5.208545 2.500102-1.875076 0.833367-3.750153 1.666734-5.625229 2.29176l-0.208342 5.625228c-0.208342 5.625229-2.708444 10.833774-6.666938 14.375585-3.750153 3.541811-9.16704 5.625229-14.792268 5.625229l-22.500916-0.833367h-0.416683c-5.833571-0.208342-10.833774-2.708444-14.583927-6.666938-3.541811-3.750153-5.625229-8.750356-5.625229-14.375585v-0.416683l0.208342-4.791862c-1.875076-0.833367-3.750153-1.666734-5.625229-2.708444l-5.625229-3.125127-3.750152 2.708444c-4.58352 3.333469-10.208749 4.58352-15.417294 3.958494-5.208545-0.833367-10.208749-3.541811-13.542218-8.12533l-13.75056-18.542422c-1.666734-2.29176-2.708444-4.58352-3.333469-7.291963-0.625025-2.708444-0.833367-5.416887-0.416683-8.125331 0.416684-2.708444 1.250051-5.208545 2.708443-7.500305 1.458393-2.29176 3.125127-4.375178 5.416887-6.041912h0.208342l3.125127-2.29176c-0.625025-2.083418-1.041709-4.375178-1.458392-6.458596-0.416684-2.083418-0.833367-4.375178-1.041709-6.666938l-3.750153-1.041709c-5.416887-1.458393-10.000407-5.000203-12.500509-9.583724-2.708444-4.58352-3.541811-10.208749-2.083418-15.833977l6.041913-22.292574c1.458393-5.416887 5.000203-10.000407 9.792065-12.500509 4.58352-2.708444 10.208749-3.541811 15.625636-2.083418l3.750152 1.041709c1.250051-1.666734 2.500102-3.333469 3.958495-5.000203 1.458393-1.666734 2.708444-3.125127 4.166836-4.58352l-1.666735-3.541811v-0.208342c-1.041709-2.500102-1.666734-5.208545-1.666734-7.916988 0-2.708444 0.416684-5.416887 1.250051-7.916989 1.041709-2.500102 2.500102-4.791862 4.375178-6.87528 1.875076-1.875076 4.166836-3.541811 6.666938-4.791862l21.042523-9.375381h0.208341c5.208545-2.29176 10.833774-2.29176 15.833978-0.416684 5.000203 1.875076 9.16704 5.625229 11.4588 10.833774l0.208341 0.208342 1.666735 3.958495h6.458596c1.250051 0.625025 3.333469 0.833367 5.416887 1.041709z" fill="#039BE5" p-id="11448"></path><path d="M492.520041 236.884639c-0.416684-0.625025-1.041709-1.666734-1.666735-1.875076-0.208342-0.208342-0.833367-0.208342-1.250051-0.208342l-20.000813 8.750356-0.625026 0.625025c-0.208342 0.208342-0.416684 0.416684-0.416684 0.625026v0.208341c-0.208342 0.208342-0.208342 0.625025-0.208341 1.04171v0.625025l6.041912 13.333876-7.708647 7.708647c-1.041709 1.041709-2.083418 2.083418-3.125127 3.333469-1.041709 1.041709-1.875076 2.29176-2.916785 3.541811l-6.458596 8.542014-13.75056-3.750153c-0.625025-0.208342-1.458393 0-2.083418 0.208342-0.625025 0.416684-1.250051 1.041709-1.458393 1.666735l-5.416887 19.792472c-0.208342 0.833367 0 1.458393 0.208342 2.083418 0.416684 0.625025 1.041709 1.041709 1.666734 1.250051l13.75056 3.750152 1.250051 10.625432c0.208342 1.666734 0.416684 3.125127 0.625025 4.58352 0.208342 1.458393 0.625025 3.125127 1.041709 4.58352l2.916786 10.417091-11.875484 8.750356c-0.208342 0.208342-0.416684 0.416684-0.416683 0.625025-0.208342 0.416684-0.416684 0.625025-0.416684 1.041709v1.041709l0.208342 0.625026 12.500509 16.667345c0.416684 0.625025 1.250051 1.250051 2.083418 1.458392 0.625025 0.208342 1.458393 0 1.875076-0.416683l11.875483-8.750356 9.16704 5.625228c1.250051 0.833367 2.708444 1.458393 3.958494 2.29176 1.250051 0.625025 2.708444 1.250051 3.958495 1.875077l8.333672 3.54181h1.458393v0.625026l0.416683 0.208342-0.625025 15.208952c0 0.625025 0.208342 1.458393 0.625025 1.875076 0.416684 0.416684 1.875076 0.833367 2.916786 0.833367l19.58413 0.625026c0.833367 0 1.458393-0.208342 2.083418-0.625026 0.625025-0.416684 0.833367-1.041709 0.833367-1.875076v-0.208342l0.625026-15.625635 10.000407-3.750153c1.250051-0.416684 2.708444-1.041709 3.958494-1.666735l3.750153-1.875076 9.583723-5.000203 12.083825 10.208748c0.625025 0.416684 2.083418 0.625025 2.916785 0.625026 0.416684-0.208342 0.833367-0.625025 1.041709-0.833367l2.916786-3.541811 10.625432-12.292167 0.416684-0.416684c0-0.208342 0.208342-0.416684 0.208342-0.625025v-0.625025-0.833368c0-0.208342-0.208342-0.416684-0.208342-0.625025-0.208342-0.208342-0.416684-0.625025-0.625026-0.833367l-12.292166-10.417091 3.333468-10.000407c0.416684-1.250051 0.833367-2.708444 1.250051-3.958494 0.416684-1.250051 0.625025-2.708444 0.833368-3.958495l2.083418-10.41709 16.042319-3.125127c0.625025-0.208342 1.250051-0.625025 1.666735-1.041709 0.416684-0.625025 0.625025-1.250051 0.416683-2.083419l-0.208342-1.458392-3.54181-18.750763c-0.208342-0.833367-0.625025-1.458393-1.250051-1.875076-0.625025-0.416684-1.250051-0.625025-2.083418-0.416684l-15.625636 3.125127-5.833571-9.16704c-0.833367-1.250051-1.458393-2.29176-2.29176-3.54181-0.833367-1.041709-1.666734-2.29176-2.708443-3.333469l-6.87528-8.125331 5.416887-10.417091 1.666735-3.333468c0.416684-0.625025 0.416684-1.458393 0.208341-2.083419l-0.208341-0.416683c-0.208342-0.416684-0.625025-0.833367-0.833368-1.041709l-18.542421-9.583724c-0.416684-0.208342-0.833367-0.416684-1.041709-0.416683-0.416684 0-0.625025 0-1.041709 0.208342s-0.625025 0.208342-1.041709 0.625025c-0.208342 0.208342-0.416684 0.625025-0.625025 0.833367l-4.375179 8.542015-2.500101 4.791861-10.833774-1.250051c-1.458393-0.208342-2.916785-0.208342-4.58352-0.416683h-4.58352l-10.625432 0.416683-5.625229-12.70885z" fill="#B3E5FC" p-id="11449"></path></svg>
-              <NavLink to='/home' style={{ color: 'white' }}>首页
-                </NavLink>
-            </Menu.Item>
-            <span >|</span>
-            <Menu.Item key="2" className="top-menu-item">
-              <NavLink to='/home/PublicMonitor' style={{ color: 'white' }}>我的订单
-                </NavLink>
-            </Menu.Item>
-            <span >|</span>
-            <Menu.Item key="3" className="top-menu-item">
-              <NavLink to='/home/PublicMonitor' style={{ color: 'white' }}>个人中心
-                </NavLink>
-            </Menu.Item>
-            <span >|</span>
-            {this.state.admin ? (
-              
-              <Menu.Item key='Person' style={{ cursor: 'default' }}>
-                <BellTwoTone />
-                <span>
-                  <NavLink to='/home/Person' style={{ color: 'white' }}>
-                    管理员界面
-                  </NavLink>
-                </span>
-              </Menu.Item>
-            ) : (
-              ''
-            )}
-          </Menu>
-        </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <div className="site-layout-content">Content</div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ticket System ©2021 Created by SCAU</Footer>
-      </Layout>
-    )
+        <Layout>
+          <Header style={{ backgroundColor: "#F4F4F4" }}>
+            <Head></Head>
+          </Header>
+          <Content>
+            <Layout className="layout">
+              <Header id="top" className="header">
+                <Carousel autoplay dotPosition="bottom" className="header-bo">
+                  <Image src={bo1} />
+
+                  <Image src={bo2} />
+                  <Image src={bo3} />
+                  <Image src={bo4} />
+                </Carousel>
+              </Header>
+              <Content style={{ padding: "2% 13%" }}>
+                <div id="card1" className="card1">
+                  <Card
+                    style={{ width: "100%" }}
+                    title={<span className="hot">热门</span>}
+                    extra={<Link to="/buyTicket">更多热门机票</Link>}
+                    tabList={tabList}
+                    activeTabKey={this.state.key}
+                    onTabChange={(key) => {
+                      this.onTabChange(key, "key");
+                    }}
+                  >
+                    {
+                      {
+                        tab1: (
+                          <p>
+                            <Card.Grid
+                              tabIndex="0"
+                              hidefocus="true"
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot1} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot2} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot3} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot4} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot5} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot6} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot7} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot8} width="100%" />
+                            </Card.Grid>
+                          </p>
+                        ),
+                        tab2: (
+                          <p>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot11} width="99%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot12} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot13} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot14} width="102%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot15} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot16} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot17} width="100%" />
+                            </Card.Grid>
+                            <Card.Grid
+                              className="gridStyle"
+                              onClick={() => {
+                                this.props.history.push("/buyTicket");
+                              }}
+                            >
+                              <img alt="" src={hot18} width="100%" />
+                            </Card.Grid>
+                          </p>
+                        ),
+                      }[this.state.key]
+                    }
+                  </Card>
+                </div>
+                <div id="card2" className="card2">
+                  <Card
+                    title={
+                      <span style={{ color: "#06c", fontWeight: "400px" }}>
+                        特价机票
+                      </span>
+                    }
+                    extra={<Link to="/buyTicket">更多特价优惠机票</Link>}
+                  >
+                    {!this.state.flights ? (
+                      <div></div>
+                    ) : (
+                      this.state.flights.map((item) => (
+                        <Card.Grid className="gridStyle1">
+                          <p className="place">
+                            {item.leaveAirportName}
+                            <SwapOutlined className="placeicon" />
+                            {item.arriveAirportName}
+                          </p>
+                          <p className="date">
+                            {item.leaveTime.split(" ")[0]}
+                            <span className="date-icon">-</span>
+                            {item.arriveTime.split(" ")[0]}
+                          </p>
+                          <p>
+                            ￥<span className="money">{item.price}</span>
+                            <span>起</span>
+                            <Button
+                              className="cardButton1"
+                              onClick={this.clicka}
+                            >
+                              立抢
+                            </Button>
+                          </p>
+                        </Card.Grid>
+                      ))
+                    )}
+                  </Card>
+                </div>
+              </Content>
+              <Footer style={{ textAlign: "center" }}>
+                Ticket System ©2021 Created by SCAU
+              </Footer>
+            </Layout>
+          </Content>
+        </Layout>
+      </div>
+    );
   }
 }
