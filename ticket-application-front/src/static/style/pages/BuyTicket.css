@@ -1,0 +1,122 @@
+*{
+    padding:0;
+    margin: 0;
+    border:0
+  }
+  
+  
+  .layout .logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background-image: url("../../images//logo.png");
+    background-size: 100% 100%;
+  }
+  
+  .ant-row-rtl #components-layout-demo-top .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+  }
+  
+  .top-menu{
+    float: right;
+  }
+  
+  
+  .contentStyle{
+    height: 160px;
+    color: #fff;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+  }
+  
+  .header1{
+    background-color: #fff;
+    height: 255px;
+    background-image: url("../../images/buyTicket.png");
+  }
+  .header-bo{
+    
+    padding-left: 0;
+    margin-left: 0;
+    
+  }
+  
+  .card11 {
+    height: auto;
+    background: #fff;
+    margin-top: -80px;
+    border-top: #3983E5 2px solid;
+    border-radius: 10px;
+    padding-bottom: 0   ;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+  
+  
+  .gridStyle{
+    width: 25%;
+    text-align: center; 
+  }
+  
+  
+  .anchor{
+    position: fixed;
+    width: 50px;
+    left: 5%;
+    top: 50%;
+  }
+  
+  .gridStyle1{
+    width: 22%;
+    height: 130px;
+    margin: 10px 10px;
+    padding:15px 15px;
+    background-color: #f8f8f8;
+  
+  }
+
+
+.searchform{
+    text-align: center;
+}
+
+  .search{
+        background-color: #FF9F09;
+        color: white;
+        border-radius:100px ;
+        -webkit-border-radius:100px ;
+        -moz-border-radius:100px ;
+        -ms-border-radius:100px ;
+        -o-border-radius:100px ;
+        width: 150px;
+        height: 56px;
+        position: relative; 
+}
+
+.cardButton{
+    margin: 0 0;
+    width: 50px;
+    text-align: center;
+    height: 30px;
+}
+
+.listTime{
+    text-align: center;
+
+}
+
+.listTimep1{
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.listTimep2{
+    font-size:10px;
+    color: rgb(117, 116, 116);
+}

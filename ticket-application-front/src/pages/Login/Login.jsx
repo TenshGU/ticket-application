@@ -18,13 +18,16 @@ const FormItem = Form.Item;
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log("qiguai")
-    console.log(this.props)
     this.state = {
       username: "",
       password: "",
       data: "",
     };
+  }
+
+  componentDidMount=()=>{
+    var date = new Date().getTime();
+    document.getElementById("checkCode").src = "http://localhost:8080/verifycode?"+date;
   }
 
   render() {
@@ -41,8 +44,16 @@ class Login extends React.Component {
             },
           })
             .then((res) => {
-              console.log(res)
-              message.success("登录成功！");
+              //console.log(res.data)
+              if(res.data.code===1006){
+                
+                sessionStorage.setItem("bear",res.data.infoMap.bear)
+                sessionStorage.setItem("username",values.username)
+                this.props.history.push("home");
+              }
+              else{
+                message.warning(res.data.infoMap.error);
+              }
             })
             .catch((error) => {
               console.log(error);
@@ -62,13 +73,13 @@ class Login extends React.Component {
       
       var date = new Date().getTime();
       e.target.src = "http://localhost:8080/verifycode?"+date;
-      console.log(e.target);
+      //console.log(e.target);
       
     };
 
     return (
       <div className="login-body">
-        <duv className="login-wrapper">
+        <div className="login-wrapper">
           <div className="site-card-border-less-wrapper">
             <Card
               title={
@@ -176,7 +187,7 @@ class Login extends React.Component {
               </Form>
             </Card>
           </div>
-        </duv>
+        </div>
       </div>
     );
   }

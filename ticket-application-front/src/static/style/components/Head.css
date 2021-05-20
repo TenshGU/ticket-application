@@ -1,0 +1,55 @@
+.whole-hearder{
+  background-color: rgb(51, 51, 51);
+}
+
+.header-logotxt{
+  color: #1e90ff;
+  font-size: 1.4rem;
+  text-align: left;
+  vertical-align: top;
+  height: 100;
+}
+
+.header-txt{
+  font-size: .6rem;
+  color: #999;
+  display: inline-block;
+  padding-left: .3rem;
+  height: 100;
+}
+
+
+.hello-login{
+  color: #3983e5;
+  padding-right: 10px;
+  margin-left: 10px;
+  border-right: 1px #DDDDDD solid;
+  font-family: "Microsoft yahei", arial, Simsun, sans-serif;
+  font-weight: 400;
+}
+
+.hello-register{
+  color: #666;
+  font-family: "Microsoft yahei", arial, Simsun, sans-serif;
+  font-weight: 400;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px #DDDDDD solid;  
+}
+
+.font1{
+  margin-left: 10px;
+  font-family: "Microsoft yahei", arial, Simsun, sans-serif;
+  font-weight: 400;
+}
+
+.font2{
+  color: #666;
+  font-family: "Microsoft yahei", arial, Simsun, sans-serif;
+  font-weight: 400;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 10px;
+  border-right: 1px #DDDDDD solid;  
+}
+
