@@ -1,5 +1,6 @@
 package cn.edu.scau.ticket.application.beans;
 
+import cn.edu.scau.ticket.application.annotation.MyDateFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * @description:

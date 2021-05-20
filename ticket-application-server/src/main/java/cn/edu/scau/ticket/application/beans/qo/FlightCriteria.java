@@ -1,5 +1,6 @@
 package cn.edu.scau.ticket.application.beans.qo;
 
+import cn.edu.scau.ticket.application.annotation.MyDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("flightCriteria")
 public class FlightCriteria {
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @MyDateFormat
     private Date leaveTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @MyDateFormat(begin = false)
     private Date arriveTime;
     private String leaveAirportName;
     private String arriveAirportName;
