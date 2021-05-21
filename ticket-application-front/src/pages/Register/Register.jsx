@@ -119,10 +119,12 @@ export default class Register extends React.Component {
       })
         .then((res) => {
           //console.log(res.data)
-          if ((res.data.code == 200)) {
+          if ((res.data.code == 200)) { 
+            
+            this.props.history.push("login");
             message.success("注册成功");
           } else {
-            message.warning("res.data.infoMap");
+            message.warning("用户名已经存在");
           }
         })
         .catch((error) => {
@@ -508,6 +510,12 @@ export default class Register extends React.Component {
                         getValueFromEvent={normFile}
                         noStyle
                         type="file"
+                        rules={[
+                          {
+                            required: true,
+                            message: "请选择头像！",
+                          },
+                        ]}
                       >
                         <Upload
                           name="headImg"
