@@ -24,15 +24,12 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import moment from "moment";
 import {
-  BellTwoTone,
-  SendOutlined,
-  ToTopOutlined,
-  FireOutlined,
-  SwapOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Head from "../../components/Head";
+import C9 from "../../static/images/9C.png";
+import U3 from "../../static/images/3U.png";
 const { Header, Content, Footer } = Layout;
 
 const columns = [
@@ -130,7 +127,7 @@ export default class BuyTicket extends React.Component {
   componentDidMount = () => {
     //初始化没有搜索条件时候的列表
     axios
-      .get("http://localhost:8080/flight", {
+      .get("http://121.5.237.69/backEnd/flight", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
@@ -144,7 +141,33 @@ export default class BuyTicket extends React.Component {
             res.data.infoMap.flights.map((item) => {
               data.push({
                 key: item.id,
-                name: item.name,
+                name: (
+                  <div>
+                    {item.plane.company.name == "南方航空" ? (
+                      <div>
+                        <div className="listTimep11">
+                          <img alt="" src={C9} width="20px" />
+                          南方航空
+                        </div>
+
+                        <span className="listTimep2">
+                          {item.name + " " + item.plane.name}
+                        </span>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="listTimep11">
+                          <img alt="" src={U3} width="20px" />
+                          北方航空
+                        </div>
+
+                        <span className="listTimep2">
+                          {item.name + " " + item.plane.name}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ),
                 leave: (
                   <div className="listTime">
                     <div className="listTimep1">{item.leaveTime}</div>
@@ -193,7 +216,7 @@ export default class BuyTicket extends React.Component {
 
     //查询所有机场
     axios
-      .get("http://localhost:8080/allAirports", {
+      .get("http://121.5.237.69/backEnd/airports", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
@@ -218,25 +241,50 @@ export default class BuyTicket extends React.Component {
     console.log(e);
     console.log(moment(e.leaveTime).format("YYYY-MM-DD"));
     axios
-      .get("http://localhost:8080/flight", {
+      .get("http://121.5.237.69/backEnd/flight", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
         params: {
-          leaveTime: moment(e.leaveTime).format("YYYY-MM-DD") + " 6:00:00",
+          leaveTime: moment(e.leaveTime).format("YYYY-MM-DD"),
           leaveAirportName: e.leave,
           arriveAirportName: e.arrive,
         },
       })
       .then((res) => {
         if (res.data.code == 200) {
-          console.log(res.data.infoMap);
           const data = [];
           if (res.data.infoMap.total != 0) {
             res.data.infoMap.flights.map((item) => {
               data.push({
                 key: item.id,
-                name: item.name,
+                name: (
+                  <div>
+                    {item.plane.company.name == "南方航空" ? (
+                      <div>
+                        <div className="listTimep11">
+                          <img alt="" src={C9} width="20px" />
+                          南方航空
+                        </div>
+
+                        <span className="listTimep2">
+                          {item.name + " " + item.plane.name}
+                        </span>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="listTimep11">
+                          <img alt="" src={U3} width="20px" />
+                          北方航空
+                        </div>
+
+                        <span className="listTimep2">
+                          {item.name + " " + item.plane.name}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ),
                 leave: (
                   <div className="listTime">
                     <div className="listTimep1">{item.leaveTime}</div>
@@ -287,36 +335,35 @@ export default class BuyTicket extends React.Component {
   buyTicket = (e) => {
     console.log(e.target.attributes);
     axios({
-        method: 'put',//请求方法
-        url: 'http://localhost:8080/flightBook',
-        headers:{
-            bear:sessionStorage.getItem("bear")
-        },
-        params: {
-            id:e.target.attributes.id.nodeValue,
-            name:e.target.attributes.name.nodeValue,
-            price:e.target.attributes.price.nodeValue,
-            leaveAirportName:e.target.attributes.leaveAirportName.nodeValue,
-            arriveAirportName:e.target.attributes.arriveAirportName.nodeValue
-        },
-        
-    }).then(res => {
-        if(res.data.msg=="未登录"){
-            message.warning("请重新登录。");
-        }
-        else{
-            console.log(res.data)
-            var newWin = window.open('', '_blank');
-　　newWin.document.write(res.data);
-        }
-        
-    })
-    
+      method: "put", //请求方法
+      url: "http://121.5.237.69/backEnd/flightBook",
+      headers: {
+        bear: sessionStorage.getItem("bear"),
+      },
+      params: {
+        id: e.target.attributes.id.nodeValue,
+        name: e.target.attributes.name.nodeValue,
+        price: e.target.attributes.price.nodeValue,
+        leaveAirportName: e.target.attributes.leaveAirportName.nodeValue,
+        arriveAirportName: e.target.attributes.arriveAirportName.nodeValue,
+      },
+    }).then((res) => {
+      if (res.data.msg == "未登录") {
+        message.warning("请重新登录");
+      } else if (res.data.msg == "没有权限") {
+        message.warning("管理员账号无法购买机票");
+      } else {
+        console.log(res.data);
+        var newWin = window.open("", "_self");
+        newWin.document.write(res.data);
+      }
+    });
   };
 
   render() {
     //这两行是性别选择框的,select的值不会直接给到Form.item,读不到下拉框的值,所以要通过这个函数
     const formRef = React.createRef();
+    
     const onGenderChange1 = (value) => {
       this.formRef.current.setFieldsValue({
         leave: value,
@@ -330,12 +377,6 @@ export default class BuyTicket extends React.Component {
       return;
     };
 
-    const onGenderChange3 = (value) => {
-      this.formRef.current.setFieldsValue({
-        leaveTime: value,
-      });
-      return;
-    };
 
     return (
       <div>

@@ -22,7 +22,7 @@ export default class Head extends Component {
   //更新个人信息面板的信息
   componentDidMount = () => {
     axios
-      .get("http://localhost:8080/myself", {
+      .get("http://121.5.237.69/backEnd/myself", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
@@ -44,7 +44,7 @@ export default class Head extends Component {
   render() {
     return (
       <Row className="whole-header">
-        <Col textAlign="middle" offset={1} span={4}>
+        <Col textalign="middle" offset={1} span={4}>
           <span className="header-logotxt">机票订购系统</span>
           <span className="header-txt">让旅行更幸福！</span>
         </Col>
@@ -99,8 +99,8 @@ export default class Head extends Component {
               我的订单
             </NavLink>
             {sessionStorage.username === "admin" ? (
-              <NavLink to="/myOrder" className="font2">
-                管理员界面
+              <NavLink to="/ticketManagement" className="font2">
+                票务管理
               </NavLink>
             ) : (
               <span></span>
@@ -115,9 +115,6 @@ export default class Head extends Component {
                 </NavLink>
                 <NavLink to="/register" className="hello-register">
                   免费注册
-                </NavLink>
-                <NavLink to="/myOrder" className="hello-register">
-                  我的订单
                 </NavLink>
               </Col>
             </Row>

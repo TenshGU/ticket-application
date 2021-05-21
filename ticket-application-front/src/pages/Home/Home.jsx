@@ -69,7 +69,7 @@ export default class Home extends React.Component {
 
   componentDidMount = () => {
     axios
-      .get("http://localhost:8080/flight", {
+      .get("http://121.5.237.69/backEnd/flight", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
@@ -152,7 +152,7 @@ export default class Home extends React.Component {
                     {
                       {
                         tab1: (
-                          <p>
+                          <div>
                             <Card.Grid
                               tabIndex="0"
                               hidefocus="true"
@@ -219,10 +219,10 @@ export default class Home extends React.Component {
                             >
                               <img alt="" src={hot8} width="100%" />
                             </Card.Grid>
-                          </p>
+                          </div>
                         ),
                         tab2: (
-                          <p>
+                          <div>
                             <Card.Grid
                               className="gridStyle"
                               onClick={() => {
@@ -287,7 +287,7 @@ export default class Home extends React.Component {
                             >
                               <img alt="" src={hot18} width="100%" />
                             </Card.Grid>
-                          </p>
+                          </div>
                         ),
                       }[this.state.key]
                     }
@@ -307,17 +307,17 @@ export default class Home extends React.Component {
                     ) : (
                       this.state.flights.map((item) => (
                         <Card.Grid className="gridStyle1">
-                          <p className="place">
+                          <div className="place">
                             {item.leaveAirportName}
                             <SwapOutlined className="placeicon" />
                             {item.arriveAirportName}
-                          </p>
-                          <p className="date">
+                          </div>
+                          <div className="date">
                             {item.leaveTime.split(" ")[0]}
                             <span className="date-icon">-</span>
                             {item.arriveTime.split(" ")[0]}
-                          </p>
-                          <p>
+                          </div>
+                          <div>
                             ￥<span className="money">{item.price}</span>
                             <span>起</span>
                             <Button
@@ -326,7 +326,7 @@ export default class Home extends React.Component {
                             >
                               立抢
                             </Button>
-                          </p>
+                          </div>
                         </Card.Grid>
                       ))
                     )}

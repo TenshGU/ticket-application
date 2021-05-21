@@ -7,6 +7,7 @@ import Home from './Home/Home';
 import PersonalCenter from './PersonalCenter/PersonalCenter';
 import BuyTicket from './BuyTicket/BuyTicket'
 import MyOrder from './MyOrder/MyOrder';
+import TicketManagement from './TicketManagement/TicketManagement'
 class App extends React.Component {
   render() {
       return (
@@ -19,6 +20,7 @@ class App extends React.Component {
                   <Route path="/personalCenter" history={this.props.history}  component={PersonalCenter}></Route>
                   <Route path="/buyTicket" history={this.props.history}  component={BuyTicket}></Route>
                   <Route path="/myOrder" history={this.props.history}  component={MyOrder}></Route>
+                  <Route path="/ticketManagement" history={this.props.history}  component={TicketManagement}></Route>
                   <Redirect to="/login"></Redirect>
               </Switch>
           </HashRouter>

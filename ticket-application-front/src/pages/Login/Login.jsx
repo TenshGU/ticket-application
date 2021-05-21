@@ -27,7 +27,7 @@ class Login extends React.Component {
 
   componentDidMount=()=>{
     var date = new Date().getTime();
-    document.getElementById("checkCode").src = "http://localhost:8080/verifycode?"+date;
+    document.getElementById("checkCode").src = "http://121.5.237.69/backEnd/verifycode?"+date;
   }
 
   render() {
@@ -36,7 +36,7 @@ class Login extends React.Component {
       axios.defaults.withCredentials = true
           axios({
             method: "post",
-            url: "http://localhost:8080/login",
+            url: "http://121.5.237.69/backEnd/login",
             params: {
               username: values.username,
               password: values.password,
@@ -72,7 +72,7 @@ class Login extends React.Component {
     const changeCode = (e) => {
       
       var date = new Date().getTime();
-      e.target.src = "http://localhost:8080/verifycode?"+date;
+      e.target.src = "http://121.5.237.69/backEnd/verifycode?"+date;
       //console.log(e.target);
       
     };
@@ -144,6 +144,7 @@ class Login extends React.Component {
                 {/* 验证码框 */}
                 <Form.Item
                   name="code"
+                  style={{width:"100%"}}
                   rules={[
                     {
                       required: true,
@@ -158,7 +159,7 @@ class Login extends React.Component {
                     placeholder="verify-code"
                     className="login-form-code"
                   />
-                  <img id="checkCode" onClick={changeCode} src="http://localhost:8080/verifycode" />
+                  <img id="checkCode" onClick={changeCode} src="http://121.5.237.69/backEnd/verifycode" />
                   </Space>
                 </Form.Item>
                 

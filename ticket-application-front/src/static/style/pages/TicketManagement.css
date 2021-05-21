@@ -48,6 +48,7 @@
     height: auto;
     background: #fff;
     margin-top: -80px;
+    padding: 50px;
     border-top: #3983E5 2px solid;
     border-radius: 10px;
     padding-bottom: 0   ;
@@ -119,11 +120,4 @@
 .listTimep2{
     font-size:10px;
     color: rgb(117, 116, 116);
-}
-
-
-.listTimep1{
-  text-align: center;
-  font-weight: 500;
-  font-size: 16px;
 }

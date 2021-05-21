@@ -53,7 +53,7 @@ export default class personalCenter extends React.Component {
 
   componentDidMount = () => {
     axios
-      .get("http://localhost:8080/myself", {
+      .get("http://121.5.237.69/backEnd/myself", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
@@ -91,12 +91,12 @@ export default class personalCenter extends React.Component {
             <Layout className="layout">
               <Header id="top" className="header1"></Header>
               <Content style={{ padding: "2% 13%" }}>
-                <div id="card1" className="card11">
+                <div  className="card112">
                   <Row
                     style={{
                       height: "200px",
                       margin: "30px 20%",
-                      textAlign: "center",
+                      textAlign: "center",  
                     }}
                   >
                     <Descriptions

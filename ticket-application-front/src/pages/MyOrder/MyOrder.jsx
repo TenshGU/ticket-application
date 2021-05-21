@@ -33,6 +33,8 @@ import {
 } from "@ant-design/icons";
 import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Head from "../../components/Head";
+import C9 from "../../static/images/9C.png";
+import U3 from "../../static/images/3U.png";
 const { Header, Content, Footer } = Layout;
 
 const columns = [
@@ -137,7 +139,7 @@ export default class MyOrder extends React.Component {
   componentDidMount = () => {
     //初始化没有搜索条件时候的列表
     axios
-      .get("http://localhost:8080/orders", {
+      .get("http://121.5.237.69/backEnd/orders", {
         headers: {
           bear: sessionStorage.getItem("bear"),
         },
@@ -152,7 +154,33 @@ export default class MyOrder extends React.Component {
               data.push({
                 key: item.flight.id,
                 time:moment(item.orderTime).format("YYYY-MM-DD  HH:mm:ss"),
-                name: item.flight.name,
+                name: (
+                  <div>
+                    {item.flight.plane.company.name == "南方航空" ? (
+                      <div>
+                        <div className="listTimep11">
+                          <img alt="" src={C9} width="20px" />
+                          南方航空
+                        </div>
+
+                        <span className="listTimep2">
+                          {item.flight.name + " " + item.flight.plane.name}
+                        </span>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="listTimep11">
+                          <img alt="" src={U3} width="20px" />
+                          北方航空
+                        </div>
+
+                        <span className="listTimep2">
+                          {item.flight.name + " " + item.flight.plane.name}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ),
                 leave: (
                   <div className="listTime">
                     <div className="listTimep1">{item.flight.leaveTime}</div>
@@ -170,65 +198,6 @@ export default class MyOrder extends React.Component {
                     <p>
                       ￥<span className="money">{item.flight.price}</span>
                       
-                    </p>
-                  </Space>
-                ),
-              });
-            });
-          }
-          this.setState({
-            data: data,
-          });
-        } else {
-          this.props.history.push("login");
-          message.warning("请重新登录。");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  updatelist = (e) => {
-    console.log(e);
-    console.log(moment(e.leaveTime).format("YYYY-MM-DD"));
-    axios
-      .get("http://localhost:8080/orders", {
-        headers: {
-          bear: sessionStorage.getItem("bear"),
-        },
-        params: {
-          leaveTime: moment(e.leaveTime).format("YYYY-MM-DD") + " 6:00:00",
-          leaveAirportName: e.leave,
-          arriveAirportName: e.arrive,
-        },
-      })
-      .then((res) => {
-        if (res.data.code == 200) {
-          console.log(res.data.infoMap);
-          const data = [];
-          if (res.data.infoMap.total != 0) {
-            res.data.infoMap.orders.map((item) => {
-              data.push({
-                key: item.id,
-                time:moment(item.orderTime).format("YYYY-MM-DD  HH:mm:ss"),
-                name: item.name,
-                leave: (
-                  <div className="listTime">
-                    <div className="listTimep1">{item.flight.leaveTime}</div>
-                    <div className="listTimep2">{item.flight.leaveAirportName}</div>
-                  </div>
-                ),
-                arrive: (
-                  <div className="listTime">
-                    <div className="listTimep1">{item.flight.arriveTime}</div>
-                    <div className="listTimep2">{item.flight.arriveAirportName}</div>
-                  </div>
-                ),
-                price: (
-                  <Space size="middle">
-                    <p>
-                      ￥<span className="money">{item.flight.price}</span>
                     </p>
                   </Space>
                 ),
