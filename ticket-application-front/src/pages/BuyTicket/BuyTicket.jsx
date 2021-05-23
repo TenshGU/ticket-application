@@ -354,7 +354,7 @@ export default class BuyTicket extends React.Component {
         message.warning("管理员账号无法购买机票");
       } else {
         console.log(res.data);
-        var newWin = window.open("", "_self");
+        var newWin = window.open("", "_new");
         newWin.document.write(res.data);
       }
     });

@@ -124,7 +124,6 @@ const columns = [
     key: "price",
     align: "center",
   },
-
 ];
 
 export default class MyOrder extends React.Component {
@@ -132,7 +131,7 @@ export default class MyOrder extends React.Component {
     super(props);
 
     this.state = {
-      data: [],
+      datalist: [],
     };
   }
 
@@ -150,10 +149,11 @@ export default class MyOrder extends React.Component {
           console.log(res.data.infoMap);
           const data = [];
           if (res.data.infoMap.total != 0) {
+            console.log("啊啊啊")
             res.data.infoMap.orders.map((item) => {
               data.push({
-                key: item.flight.id,
-                time:moment(item.orderTime).format("YYYY-MM-DD  HH:mm:ss"),
+                key: item.id,
+                time: moment(item.orderTime).format("YYYY-MM-DD  HH:mm:ss"),
                 name: (
                   <div>
                     {item.flight.plane.company.name == "南方航空" ? (
@@ -184,20 +184,23 @@ export default class MyOrder extends React.Component {
                 leave: (
                   <div className="listTime">
                     <div className="listTimep1">{item.flight.leaveTime}</div>
-                    <div className="listTimep2">{item.flight.leaveAirportName}</div>
+                    <div className="listTimep2">
+                      {item.flight.leaveAirportName}
+                    </div>
                   </div>
                 ),
                 arrive: (
                   <div className="listTime">
                     <div className="listTimep1">{item.flight.arriveTime}</div>
-                    <div className="listTimep2">{item.flight.arriveAirportName}</div>
+                    <div className="listTimep2">
+                      {item.flight.arriveAirportName}
+                    </div>
                   </div>
                 ),
                 price: (
                   <Space size="middle">
                     <p>
                       ￥<span className="money">{item.flight.price}</span>
-                      
                     </p>
                   </Space>
                 ),
@@ -205,7 +208,7 @@ export default class MyOrder extends React.Component {
             });
           }
           this.setState({
-            data: data,
+            datalist: data,
           });
         } else {
           this.props.history.push("login");
@@ -218,7 +221,6 @@ export default class MyOrder extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         <Layout>
@@ -230,12 +232,11 @@ export default class MyOrder extends React.Component {
               <Header id="top" className="header1"></Header>
               <Content style={{ padding: "2% 13%" }}>
                 <div id="card1" className="card11">
-               
                   <div>
                     <Table
                       columns={columns}
-                      dataSource={this.state.data}
-                      pagination={{ pageSize: 5 }}
+                      dataSource={this.state.datalist}
+                      pagination={{pageSize:5}}
                     />
                   </div>
                 </div>
