@@ -1,6 +1,6 @@
 # ticket-application
 The System of ticket（飞机订票系统）  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——2021.7.25开源，以此纪念我和猴哥和+锐的第一个前后端分离+外网访问项目😭
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——2021.7.25开源，前后端分离+外网访问项目😭
 <br/><br/>
 项目技术栈：<br/>
 **React+SpringBoot+MyBatis+SpringSecurity+MySql+Redis**<br/>
