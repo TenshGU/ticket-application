@@ -1,6 +1,7 @@
 # ticket-application
 飞机订票系统，React+SpringBoot+MyBatis+SpringSecurity+MySql+Redis
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——2021.7开源，前后端分离+外网访问项目😭
+(一些注释还没来得及删除)
 <br/><br/>
 项目技术栈：<br/>
 **React+SpringBoot+MyBatis+SpringSecurity+MySql+Redis**<br/>
